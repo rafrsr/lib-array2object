@@ -1,0 +1,1 @@
+# lib-array2object
