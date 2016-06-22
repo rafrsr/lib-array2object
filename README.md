@@ -88,6 +88,7 @@ $property
 | double         | Primitive float                                                         |
 | string         | Primitive string                                                        |
 | array          | An array with arbitrary keys, and values.                               |
+| array\|\<type\>[]| Array of *\<Type\>*. The _\<type\>_ should be one scalar type. |
 | array\|\<Object\>[]| Array of *\<Object\>* instance. The _\<Object\>_ should be the class to use. |
 | DateTime       | Instance of \DateTime class                                             |
 
