@@ -11,6 +11,7 @@ namespace Rafrsr\LibArray2Object\Tests;
 
 use Rafrsr\LibArray2Object\Array2Object;
 use Rafrsr\LibArray2Object\Parser\CallableParser;
+use Rafrsr\LibArray2Object\PropertyMatcher\MapMatcher;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 
 class Array2ObjectTest extends \PHPUnit_Framework_TestCase
@@ -94,5 +95,38 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
         static::assertInternalType('float', $team->getPlayers()[0]->getHeight());
         static::assertInternalType('boolean', $team->getPlayers()[2]->isRegular());
         static::assertInternalType('integer', $team->getScores()[2016]);
+
+        $teamArray = [
+            'name' => 'New Name'
+        ];
+
+        Array2Object::populate($team, $teamArray);
+        static::assertEquals('New Name', $team->getName());
+    }
+
+    public function testPopulateObjectError()
+    {
+        static::setExpectedException('\InvalidArgumentException');
+        Array2Object::populate(Team::class, []);
+    }
+
+    public function testCreateObjectError()
+    {
+        static::setExpectedException('\InvalidArgumentException');
+        Array2Object::createObject(new Team(), []);
+    }
+
+    public function testSettingPropertyMatcher()
+    {
+        Array2Object::setPropertyMatcher(
+            new MapMatcher(
+                [
+                    'name' => 'nombre'
+                ]
+            )
+        );
+        /** @var Team $team */
+        $team = Array2Object::createObject(Team::class, ['nombre' => 'Team']);
+        static::assertEquals('Team', $team->getName());
     }
 }

@@ -16,6 +16,8 @@ use Rafrsr\LibArray2Object\Parser\IntegerParser;
 use Rafrsr\LibArray2Object\Parser\ObjectParser;
 use Rafrsr\LibArray2Object\Parser\StringParser;
 use Rafrsr\LibArray2Object\Parser\ValueParserInterface;
+use Rafrsr\LibArray2Object\PropertyMatcher\CamelizeMatcher;
+use Rafrsr\LibArray2Object\PropertyMatcher\PropertyMatcherInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
@@ -28,6 +30,11 @@ class Array2Object
      * @var array|ValueParserInterface
      */
     private static $parsers;
+
+    /**
+     * @var PropertyMatcherInterface
+     */
+    private static $propertyMatcher;
 
     /**
      * registerParser
@@ -46,6 +53,16 @@ class Array2Object
     }
 
     /**
+     * @param PropertyMatcherInterface $propertyMatcher
+     *
+     * @return $this
+     */
+    public static function setPropertyMatcher(PropertyMatcherInterface $propertyMatcher)
+    {
+        self::$propertyMatcher = $propertyMatcher;
+    }
+
+    /**
      * createObject
      *
      * @param string $class class to create object or instance
@@ -60,7 +77,7 @@ class Array2Object
         if (is_string($class) && class_exists($class)) {
             $object = new $class;
         } else {
-            $object = new $class;
+            throw new \InvalidArgumentException('The first argument should be a valid class, can use ::populate with objects');
         }
 
         self::populate($object, $data);
@@ -88,10 +105,10 @@ class Array2Object
 
         foreach (self::getClassProperties($reflClass) as $property) {
             foreach ($data as $key => $value) {
-                if ($propertyAccessor->isWritable($object, $key) && self::isSameProperty($property->getName(), $key)) {
+                if ($propertyAccessor->isWritable($object, $property->getName()) && self::$propertyMatcher->match($property, $key)) {
                     $types = self::getPropertyTypes($property);
                     $value = self::parseValue($value, $types, $property, $object);
-                    $propertyAccessor->setValue($object, $key, $value);
+                    $propertyAccessor->setValue($object, $property->getName(), $value);
                 }
             }
         }
@@ -102,6 +119,10 @@ class Array2Object
      */
     static private function setup()
     {
+        if (!self::$propertyMatcher) {
+            self::$propertyMatcher = new CamelizeMatcher();
+        }
+
         self::registerParser(
             [
                 new StringParser(),
@@ -141,26 +162,6 @@ class Array2Object
     }
 
     /**
-     * @param $propertyName
-     * @param $givenName
-     *
-     * @return bool
-     */
-    static private function isSameProperty($propertyName, $givenName)
-    {
-        if ($propertyName === $givenName
-            || $propertyName === self::camelize($givenName) //ErrorCode = error_code
-            || $propertyName === lcfirst(self::camelize($givenName)) // errorCode => error_code
-            || $propertyName === strtolower(self::camelize($givenName)) // errorcode => error_code
-            || strtolower($propertyName) === $givenName // errorCode => errorcode
-        ) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
      * Parse a value using given types
      *
      * @param mixed               $value
@@ -190,16 +191,6 @@ class Array2Object
         }
 
         return $value;
-    }
-
-    /**
-     * @param $name
-     *
-     * @return string
-     */
-    static private function camelize($name)
-    {
-        return strtr(ucwords(strtr($name, ['_' => ' '])), [' ' => '']);
     }
 
     /**
