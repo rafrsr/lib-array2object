@@ -48,7 +48,7 @@ class Object2ArrayTest extends \PHPUnit_Framework_TestCase
 
         $array = $object2Array->createArray($team);
         static::assertEquals($team->getName(), $array['name']);
-        static::assertEquals('2016-01-01T00:00:00+01:00', $array['createdAt']);
+        static::assertEquals('2016-01-01 00:00:00', $array['createdAt']);
         static::assertEquals($manager->getName(), $array['manager']['name']);
         static::assertEquals('$10000', $array['manager']['salary']);
         static::assertEquals('Player 1', $array['players'][0]['name']);

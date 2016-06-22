@@ -39,7 +39,7 @@ class DateTimeParser implements ValueParserInterface
     public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
     {
         if ($value instanceof \DateTime) {
-            return $value->format('c');
+            return $value->format('Y-m-d H:i:s');
         }
 
         return $value;
