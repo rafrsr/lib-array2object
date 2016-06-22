@@ -11,6 +11,19 @@ Array to object conversion library. Convert a array to a object using simple and
 1. [Install composer](https://getcomposer.org/download/)
 2. Execute: `composer require rafrsr/lib-array2object`
 
+## Usage
+
+````php
+$phpArray = ['name' => 'David', 'number' => '1'];
+$object = Array2ObjectBuilder::create()->build()->createObject(Player::class, $phpArray);
+echo $object->getName();//David
+echo $object->getNumber();//1
+
+$array = Object2ArrayBuilder::create()->build()->createArray($object);
+echo $array['name'];//David
+echo $array['number'];//1
+````
+
 ## Documentation
 
 Full documentation are available on the [wiki page](https://github.com/rafrsr/lib-array2object/wiki)
