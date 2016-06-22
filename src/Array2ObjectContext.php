@@ -9,107 +9,14 @@
 
 namespace Rafrsr\LibArray2Object;
 
-use Rafrsr\LibArray2Object\Parser\ValueParserInterface;
-use Rafrsr\LibArray2Object\Matcher\PropertyMatcherInterface;
 use Rafrsr\LibArray2Object\Writer\PropertyWriterInterface;
 
-/**
- * Class Array2ObjectContext
- */
-class Array2ObjectContext
+class Array2ObjectContext extends AbstractContext
 {
-    /**
-     * @var array|ValueParserInterface[]
-     */
-    private $parsers = [];
-
-    /**
-     * @var PropertyMatcherInterface
-     */
-    private $matcher;
-
     /**
      * @var PropertyWriterInterface
      */
     private $writer;
-
-    /**
-     * @return array|Parser\ValueParserInterface[]
-     */
-    public function getParsers()
-    {
-        return $this->parsers;
-    }
-
-    /**
-     * @param array|Parser\ValueParserInterface[] $parsers
-     *
-     * @return $this
-     */
-    public function setParsers($parsers)
-    {
-        $this->parsers = [];
-        foreach ($parsers as $parser) {
-            if ($parser instanceof ValueParserInterface) {
-                $this->parsers[$parser->getName()] = $parser;
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * Append parser to the list of parsers, LOW priority
-     *
-     * @param ValueParserInterface $parser
-     *
-     * @return $this
-     */
-    public function appendParser(ValueParserInterface $parser)
-    {
-        $this->parsers[$parser->getName()] = $parser;
-
-        return $this;
-    }
-
-    /**
-     * Prepend parser to list of parsers, HIGH priority
-     *
-     * @param ValueParserInterface $parser
-     *
-     * @return $this
-     */
-    public function prependParser(ValueParserInterface $parser)
-    {
-        $parsers = $this->parsers;
-        if (array_key_exists($parser->getName(), $parsers)) {
-            unset($parsers[$parser->getName()]);
-        }
-
-        $this->parsers = [$parser->getName() => $parser] + $parsers;
-
-        return $this;
-    }
-
-    /**
-     * @return PropertyMatcherInterface
-     */
-    public function getMatcher()
-    {
-        return $this->matcher;
-    }
-
-    /**
-     * @param PropertyMatcherInterface $matcher
-     *
-     * @return $this
-     */
-    public function setMatcher($matcher)
-    {
-        $this->matcher = $matcher;
-
-        return $this;
-    }
 
     /**
      * @return PropertyWriterInterface

@@ -41,7 +41,15 @@ class CallableParser implements ValueParserInterface
     /**
      * @inheritDoc
      */
-    public function parseValue($value, $type, \ReflectionProperty $property, $object)
+    public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
+    {
+        return call_user_func($this->parserCallback, $value, $type, $property, $object);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
     {
         return call_user_func($this->parserCallback, $value, $type, $property, $object);
     }

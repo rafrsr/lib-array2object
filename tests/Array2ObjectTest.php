@@ -120,7 +120,7 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingPropertyMatcher()
     {
-        $array2Object = Array2ObjectBuilder::create()->setPropertyMatcher(
+        $array2Object = Array2ObjectBuilder::create()->setMatcher(
             new MapMatcher(
                 [
                     'name' => 'nombre'

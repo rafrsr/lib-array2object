@@ -24,7 +24,7 @@ class BooleanParser implements ValueParserInterface
     /**
      * @inheritDoc
      */
-    public function parseValue($value, $type, \ReflectionProperty $property, $object)
+    public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
         if ($type === 'boolean' || $type === 'bool') {
             if (is_string($value)) {
@@ -46,6 +46,14 @@ class BooleanParser implements ValueParserInterface
             }
         }
 
+        return $value;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
+    {
         return $value;
     }
 }

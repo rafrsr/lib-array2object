@@ -24,12 +24,20 @@ class IntegerParser implements ValueParserInterface
     /**
      * @inheritDoc
      */
-    public function parseValue($value, $type, \ReflectionProperty $property, $object)
+    public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
         if ($type === 'integer' || $type === 'int') {
             return (integer)$value;
         }
 
+        return $value;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
+    {
         return $value;
     }
 }

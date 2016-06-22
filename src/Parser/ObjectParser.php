@@ -9,23 +9,33 @@
 
 namespace Rafrsr\LibArray2Object\Parser;
 
+use Rafrsr\LibArray2Object\AbstractContext;
 use Rafrsr\LibArray2Object\Array2Object;
 use Rafrsr\LibArray2Object\Array2ObjectContext;
+use Rafrsr\LibArray2Object\Object2Array;
+use Rafrsr\LibArray2Object\Object2ArrayContext;
 
 class ObjectParser implements ValueParserInterface
 {
     const NAME = 'object';
 
+    /** @var Array2Object */
     protected $array2Object;
+    /** @var Object2Array */
+    protected $object2Array;
 
     /**
      * ObjectParser constructor.
      *
-     * @param Array2ObjectContext $context
+     * @param AbstractContext $context
      */
-    public function __construct(Array2ObjectContext $context)
+    public function __construct(AbstractContext $context)
     {
-        $this->array2Object = new Array2Object($context);
+        if ($context instanceof Array2ObjectContext) {
+            $this->array2Object = new Array2Object($context);
+        } elseif ($context instanceof Object2ArrayContext) {
+            $this->object2Array = new Object2Array($context);
+        }
     }
 
     /**
@@ -39,7 +49,7 @@ class ObjectParser implements ValueParserInterface
     /**
      * @inheritDoc
      */
-    public function parseValue($value, $type, \ReflectionProperty $property, $object)
+    public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
         $className = null;
         $context = new \ReflectionClass($property->class);
@@ -64,7 +74,21 @@ class ObjectParser implements ValueParserInterface
         }
 
         if (is_array($value) && $className !== null && class_exists($className)) {
-            return $this->array2Object->createObject($className, $value);
+            if ($this->array2Object) {
+                return $this->array2Object->createObject($className, $value);
+            }
+        }
+
+        return $value;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
+    {
+        if (is_object($value)) {
+            return $this->object2Array->createArray($value);
         }
 
         return $value;

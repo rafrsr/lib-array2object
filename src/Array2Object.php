@@ -23,7 +23,7 @@ class Array2Object
     private $context;
 
     /**
-     * Array2Object constructor.
+     * @param Array2ObjectContext $context
      */
     public function __construct(Array2ObjectContext $context)
     {
@@ -89,45 +89,18 @@ class Array2Object
             $object->__populate($this, $data);
         } else {
             $reflClass = new \ReflectionClass($object);
-
-            foreach ($this->getClassProperties($reflClass) as $property) {
+            foreach (Utils::getClassProperties($reflClass) as $property) {
                 foreach ($data as $key => $value) {
                     if ($this->context->getMatcher()->match($property, $key)
                         && $this->context->getWriter()->isWritable($object, $property->getName())
                     ) {
-                        $types = $this->getPropertyTypes($property);
+                        $types = Utils::getPropertyTypes($property);
                         $value = $this->parseValue($value, $types, $property, $object);
                         $this->context->getWriter()->setValue($object, $property->getName(), $value);
                     }
                 }
             }
         }
-    }
-
-    /**
-     * Get array of class properties including parents private properties
-     *
-     * @param \ReflectionClass $refClass
-     *
-     * @return array|\ReflectionProperty[]
-     */
-    private function getClassProperties(\ReflectionClass $refClass)
-    {
-        $props = $refClass->getProperties();
-        $props_arr = [];
-        foreach ($props as $prop) {
-            $f = $prop->getName();
-
-            $props_arr[$f] = $prop;
-        }
-        if ($parentClass = $refClass->getParentClass()) {
-            $parent_props_arr = $this->getClassProperties($parentClass);//RECURSION
-            if (count($parent_props_arr) > 0) {
-                $props_arr = array_merge($parent_props_arr, $props_arr);
-            }
-        }
-
-        return $props_arr;
     }
 
     /**
@@ -148,10 +121,10 @@ class Array2Object
                 if ($parser instanceof ValueParserInterface) {
                     if (is_array($value) && strpos($type, '[]') !== false) {
                         foreach ($value as $key => &$arrayValue) {
-                            $arrayValue = $parser->parseValue($arrayValue, str_replace('[]', null, $type), $property, $object);
+                            $arrayValue = $parser->toObjectValue($arrayValue, str_replace('[]', null, $type), $property, $object);
                         }
                     } else {
-                        $value = $parser->parseValue($value, $type, $property, $object);
+                        $value = $parser->toObjectValue($value, $type, $property, $object);
                     }
                 } else {
                     throw new \InvalidArgumentException(sprintf("%s is not a valid parser.", get_class($parser)));
@@ -160,22 +133,5 @@ class Array2Object
         }
 
         return $value;
-    }
-
-    /**
-     * @param \ReflectionProperty $property
-     *
-     * @return array
-     */
-    private function getPropertyTypes(\ReflectionProperty $property)
-    {
-        $doc = $property->getDocComment();
-        preg_match('/@var\s([\w\\\|\[\]]+)/', $doc, $matches);
-        $types = [];
-        if (isset($matches[1])) {
-            $types = explode('|', $matches[1]);
-        }
-
-        return $types;
     }
 }

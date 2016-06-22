@@ -30,7 +30,6 @@ class Array2ObjectInterfaceTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        //register custom parser
         $array2Object = Array2ObjectBuilder::create()->build();
 
         /** @var Game $game */

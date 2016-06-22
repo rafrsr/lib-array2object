@@ -11,8 +11,10 @@ namespace Rafrsr\LibArray2Object\Tests\Fixtures;
 
 use Rafrsr\LibArray2Object\Array2Object;
 use Rafrsr\LibArray2Object\Array2ObjectInterface;
+use Rafrsr\LibArray2Object\Object2Array;
+use Rafrsr\LibArray2Object\Object2ArrayInterface;
 
-class Game implements Array2ObjectInterface
+class Game implements Array2ObjectInterface, Object2ArrayInterface
 {
 
     protected $stadiumName;
@@ -112,5 +114,18 @@ class Game implements Array2ObjectInterface
         $this->setStadiumName($data['stadium']);
         $this->setHomeClub($array2Object->createObject(Team::class, $data['homeClub']));
         $this->setVisitor($array2Object->createObject(Team::class, $data['visitor']));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function __toArray(Object2Array $object2Array)
+    {
+        return [
+            'date' => $this->getDate()->format('Y-m-d'),
+            'stadium' => $this->getStadiumName(),
+            'homeClub' => $object2Array->createArray($this->getHomeClub()),
+            'visitor' => $object2Array->createArray($this->getVisitor()),
+        ];
     }
 }

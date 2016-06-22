@@ -30,7 +30,7 @@ class ObjectParserTest extends \PHPUnit_Framework_TestCase
         $property = new \ReflectionProperty(get_class($object), 'name');
 
         /** @var Team $team */
-        $team = $parser->parseValue(['name' => 'New Name'], 'Team', $property, $object);
+        $team = $parser->toObjectValue(['name' => 'New Name'], 'Team', $property, $object);
         static::assertInstanceOf(Team::class, $team);
         static::assertEquals('New Name', $team->getName());
     }

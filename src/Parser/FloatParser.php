@@ -24,12 +24,20 @@ class FloatParser implements ValueParserInterface
     /**
      * @inheritDoc
      */
-    public function parseValue($value, $type, \ReflectionProperty $property, $object)
+    public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
         if ($type === 'float' || $type === 'double') {
             return (float)$value;
         }
 
+        return $value;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
+    {
         return $value;
     }
 }

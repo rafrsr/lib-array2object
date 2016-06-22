@@ -9,36 +9,32 @@
 
 namespace Rafrsr\LibArray2Object;
 
-use Rafrsr\LibArray2Object\Parser\ObjectParser;
-use Rafrsr\LibArray2Object\Writer\AccessorWriter;
-use Rafrsr\LibArray2Object\Writer\PropertyWriterInterface;
+use Rafrsr\LibArray2Object\Reader\AccessorReader;
+use Rafrsr\LibArray2Object\Reader\PropertyReaderInterface;
 
-/**
- * Class Array2ObjectBuilder
- */
-class Array2ObjectBuilder extends AbstractBuilder
+class Object2ArrayBuilder extends AbstractBuilder
 {
     /**
-     * @var PropertyWriterInterface
+     * @var PropertyReaderInterface
      */
-    private $writer;
+    private $reader;
 
     /**
-     * @return PropertyWriterInterface
+     * @return PropertyReaderInterface
      */
-    public function getWriter()
+    public function getReader()
     {
-        return $this->writer;
+        return $this->reader;
     }
 
     /**
-     * @param PropertyWriterInterface $writer
+     * @param PropertyReaderInterface $reader
      *
      * @return $this
      */
-    public function setWriter($writer)
+    public function setReader($reader)
     {
-        $this->writer = $writer;
+        $this->reader = $reader;
 
         return $this;
     }
@@ -51,12 +47,12 @@ class Array2ObjectBuilder extends AbstractBuilder
         if ($this->getContext()) {
             $context = $this->getContext();
         } else {
-            $context = new Array2ObjectContext();
+            $context = new Object2ArrayContext();
         }
 
         $this->prepareContext($context);
 
-        return new Array2Object($context);
+        return new Object2Array($context);
     }
 
     /**
@@ -66,8 +62,8 @@ class Array2ObjectBuilder extends AbstractBuilder
     {
         parent::prepareContext($context);
 
-        if ($context instanceof Array2ObjectContext) {
-            $context->setWriter($this->getWriter() ?: new AccessorWriter());
+        if ($context instanceof Object2ArrayContext) {
+            $context->setReader($this->getReader() ?: new AccessorReader());
         }
     }
 }

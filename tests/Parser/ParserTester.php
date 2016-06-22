@@ -38,7 +38,7 @@ abstract class ParserTester extends \PHPUnit_Framework_TestCase
         foreach ($this->getParseValueMap() as $origin => $expectedParsed) {
             foreach ($this->getTypes() as $type) {
                 $property = static::getMockBuilder(\ReflectionProperty::class)->disableOriginalConstructor()->getMock();
-                $parsed = $parser->parseValue($origin, $type, $property, new \stdClass());
+                $parsed = $parser->toObjectValue($origin, $type, $property, new \stdClass());
                 static::assertEquals($expectedParsed, $parsed);
             }
         }

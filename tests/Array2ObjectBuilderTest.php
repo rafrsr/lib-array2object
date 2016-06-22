@@ -72,16 +72,16 @@ class Array2ObjectBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $builder = Array2ObjectBuilder::create();
         $matcher = new CamelizeMatcher();
-        $builder->setPropertyMatcher($matcher);
-        static::assertEquals($matcher, $builder->getPropertyMatcher());
+        $builder->setMatcher($matcher);
+        static::assertEquals($matcher, $builder->getMatcher());
     }
 
     public function testGetSetPropertyWriter()
     {
         $builder = Array2ObjectBuilder::create();
         $writer = new AccessorWriter();
-        $builder->setPropertyWriter($writer);
-        static::assertEquals($writer, $builder->getPropertyWriter());
+        $builder->setWriter($writer);
+        static::assertEquals($writer, $builder->getWriter());
     }
 
     public function testBuild()
@@ -99,8 +99,8 @@ class Array2ObjectBuilderTest extends \PHPUnit_Framework_TestCase
             $builder->disableParser($name);
         }
 
-        $builder->setPropertyMatcher(new LevenshteinMatcher());
-        $builder->setPropertyWriter(new ReflectionWriter());
+        $builder->setMatcher(new LevenshteinMatcher());
+        $builder->setWriter(new ReflectionWriter());
 
         $array2Object = $builder->build();
 

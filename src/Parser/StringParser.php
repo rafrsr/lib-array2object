@@ -24,12 +24,20 @@ class StringParser implements ValueParserInterface
     /**
      * @inheritDoc
      */
-    public function parseValue($value, $type, \ReflectionProperty $property, $object)
+    public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
         if ($type === 'string') {
             return (string)$value;
         }
 
+        return $value;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
+    {
         return $value;
     }
 }

@@ -24,10 +24,22 @@ class DateTimeParser implements ValueParserInterface
     /**
      * @inheritDoc
      */
-    public function parseValue($value, $type, \ReflectionProperty $property, $object)
+    public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
         if (is_string($value) && ($type === 'DateTime' || $type === '\DateTime')) {
             return new \DateTime($value);
+        }
+
+        return $value;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
+    {
+        if ($value instanceof \DateTime) {
+            return $value->format('c');
         }
 
         return $value;
