@@ -136,6 +136,7 @@ class Array2Object
                     $value = (integer)$value;
                     break;
                 case 'float':
+                case 'double':
                     $value = (float)$value;
                     break;
                 case 'bool':
