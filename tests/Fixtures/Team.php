@@ -17,6 +17,11 @@ class Team
     protected $name;
 
     /**
+     * @var Manager
+     */
+    protected $manager;
+
+    /**
      * @var \DateTime
      */
     protected $createdAt;
@@ -32,7 +37,7 @@ class Team
     protected $players;
 
     /**
-     * @var array
+     * @var array|integer[]
      */
     protected $scores;
 
@@ -52,6 +57,26 @@ class Team
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Manager
+     */
+    public function getManager()
+    {
+        return $this->manager;
+    }
+
+    /**
+     * @param Manager $manager
+     *
+     * @return $this
+     */
+    public function setManager($manager)
+    {
+        $this->manager = $manager;
 
         return $this;
     }

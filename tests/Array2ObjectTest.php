@@ -20,6 +20,7 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
         $teamArray
             = [
             'name' => 'Dream Team',
+            'Manager' => ['name' => 'Big Manager'],
             'createdAt' => '2016-01-01',
             'points' => '25',
             'players' =>
@@ -48,6 +49,7 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
         /** @var Team $team */
         $team = Array2Object::createObject(Team::class, $teamArray);
         static::assertEquals('Dream Team', $team->getName());
+        static::assertEquals('Big Manager', $team->getManager()->getName());
         static::assertEquals(25, $team->getPoints());
         static::assertEquals(29, $team->getScores()[2016]);
         static::assertEquals('2016-01-01', $team->getCreatedAt()->format('Y-m-d'));
@@ -66,5 +68,6 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
         static::assertInternalType('integer', $team->getPoints());
         static::assertInternalType('boolean', $team->getPlayers()[0]->isRegular());
         static::assertInternalType('float', $team->getPlayers()[0]->getHeight());
+        static::assertInternalType('integer', $team->getScores()[2016]);
     }
 }

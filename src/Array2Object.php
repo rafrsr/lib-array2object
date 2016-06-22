@@ -155,8 +155,12 @@ class Array2Object
                     break;
                 case 'array':
                     if (is_array($value)) {
-                        foreach ($value as $key => $index) {
-                            $value[$key] = self::valueToObject($index, $type, $context);
+                        foreach ($value as $key => $arrayValue) {
+                            $arrayType = [];
+                            if (array_key_exists(1, $types) && $types[1] !== 'array') {
+                                $arrayType = str_replace('[]', null, $types[1]);
+                            }
+                            $value[$key] = self::parseValue($arrayValue, [$arrayType], $context);
                         }
                     }
                     break;
@@ -180,6 +184,7 @@ class Array2Object
      */
     static private function valueToObject($value, $type, \ReflectionClass $context)
     {
+        $isArrayOfObjects = (strpos($type, '[]') !== false);
         $type = str_replace('[]', null, $type);
         $className = null;
 
@@ -202,15 +207,19 @@ class Array2Object
             $className = $context->getNamespaceName() . "\\" . $type;
         }
 
-        if ($className !== null && class_exists($className)) {
-            foreach ($value as $item) {
-                if (is_array($item)) {
-                    $childObject = new $className();
-                    self::populate($childObject, $item);
-                    $newValue[] = $childObject;
-                } else {
-                    $newValue = $item;
+        if (is_array($value) && $className !== null && class_exists($className)) {
+            //array of objects
+            if ($isArrayOfObjects) {
+                $newValue = [];
+                foreach ($value as $key => $item) {
+                    if (is_array($item)) {
+                        $newValue[$key] = self::createObject($className, $value);;
+                    } else {
+                        $newValue[$key] = $item;
+                    }
                 }
+            } else { //simple object
+                $newValue = self::createObject($className, $value);
             }
         }
 
