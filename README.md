@@ -6,7 +6,7 @@
 
 Array to object conversion library. Convert a array to a object using simple and common property annotations
 
-# Usage
+## Usage
 
 Having the following classes:
 
@@ -65,7 +65,7 @@ Can use:
     echo $team->getPlayers()[0]->getName() //Player 1
 ````
 
-# How it works
+## How it works
 
 This library only use phpDocBloc common properties like `@var` and try to resolve the type of data or related object.
 
@@ -89,3 +89,21 @@ $property
 | string         | Primitive string                                                        |
 | array          | An array with arbitrary keys, and values.                               |
 | array\|\<Object\>[]| Array of *\<Object\>* instance. The _\<Object\>_ should be the class to use. |
+
+### Property Names
+
+Property names are compared using some versions of the same property name.
+
+`$propertyName -> 'propertyName' -> 'property_name' -> propertyname`
+
+### Setters
+
+Setters methods are required to set the property value, otherwise the property is not settled.
+
+````php
+public function setPropertyName()
+````
+
+## Copyright
+
+This project is licensed under the [MIT license](LICENSE).
