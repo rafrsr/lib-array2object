@@ -9,13 +9,8 @@
 
 namespace Rafrsr\LibArray2Object\Tests\Fixtures;
 
-class Team
+class Team extends AbstractTeam
 {
-    /**
-     * @var string
-     */
-    protected $name;
-
     /**
      * @var Manager
      */
@@ -40,26 +35,6 @@ class Team
      * @var array|integer[]
      */
     protected $scores;
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     /**
      * @return Manager

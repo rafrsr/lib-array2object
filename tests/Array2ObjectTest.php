@@ -9,8 +9,8 @@
 
 namespace Rafrsr\LibArray2Object\Tests;
 
-
 use Rafrsr\LibArray2Object\Array2Object;
+use Rafrsr\LibArray2Object\Parser\CallableParser;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 
 class Array2ObjectTest extends \PHPUnit_Framework_TestCase
@@ -19,7 +19,10 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
     {
         $teamArray = [
             'name' => 'Dream Team',
-            'Manager' => ['name' => 'Big Manager'],
+            'Manager' => [
+                'name' => 'Big Manager',
+                'salary' => '$10000'
+            ],
             'createdAt' => '2016-01-01',
             'points' => '25',
             'players' => [
@@ -49,13 +52,28 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
+        //register custom parser
+        Array2Object::registerParser(
+            new CallableParser(
+                function ($value, $type, \ReflectionProperty $property, $object) {
+                    if ($property->name === 'salary') {
+                        $value = str_replace('$', null, $value);
+                    }
+
+                    return $value;
+                }
+            )
+        );
+
         /** @var Team $team */
         $team = Array2Object::createObject(Team::class, $teamArray);
         static::assertEquals('Dream Team', $team->getName());
-        static::assertEquals('Big Manager', $team->getManager()->getName());
         static::assertEquals(25, $team->getPoints());
         static::assertEquals(29, $team->getScores()[2016]);
         static::assertEquals('2016-01-01', $team->getCreatedAt()->format('Y-m-d'));
+
+        static::assertEquals('Big Manager', $team->getManager()->getName());
+        static::assertEquals(10000, $team->getManager()->getSalary());
 
         static::assertEquals('Player 1', $team->getPlayers()[0]->getName());
         static::assertEquals(1, $team->getPlayers()[0]->getNumber());
@@ -71,6 +89,7 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
 
         static::assertInternalType('string', $team->getName());
         static::assertInternalType('integer', $team->getPoints());
+        static::assertInternalType('float', $team->getManager()->getSalary());
         static::assertInternalType('boolean', $team->getPlayers()[0]->isRegular());
         static::assertInternalType('float', $team->getPlayers()[0]->getHeight());
         static::assertInternalType('boolean', $team->getPlayers()[2]->isRegular());

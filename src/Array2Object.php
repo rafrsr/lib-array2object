@@ -9,6 +9,13 @@
 
 namespace Rafrsr\LibArray2Object;
 
+use Rafrsr\LibArray2Object\Parser\BooleanParser;
+use Rafrsr\LibArray2Object\Parser\DateTimeParser;
+use Rafrsr\LibArray2Object\Parser\FloatParser;
+use Rafrsr\LibArray2Object\Parser\IntegerParser;
+use Rafrsr\LibArray2Object\Parser\ObjectParser;
+use Rafrsr\LibArray2Object\Parser\StringParser;
+use Rafrsr\LibArray2Object\Parser\ValueParserInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
@@ -17,6 +24,26 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
  */
 class Array2Object
 {
+    /**
+     * @var array|ValueParserInterface
+     */
+    private static $parsers;
+
+    /**
+     * registerParser
+     *
+     * @param ValueParserInterface|array $parsers
+     */
+    static public function registerParser($parsers)
+    {
+        if (is_array($parsers)) {
+            foreach ($parsers as $parser) {
+                self::$parsers[] = $parser;
+            }
+        } else {
+            self::$parsers[] = $parsers;
+        }
+    }
 
     /**
      * createObject
@@ -49,6 +76,8 @@ class Array2Object
      */
     static public function populate($object, array $data)
     {
+        self::setup();//register parsers
+
         if (!is_object($object)) {
             throw new \InvalidArgumentException('The first param should be a object.');
         }
@@ -61,11 +90,28 @@ class Array2Object
             foreach ($data as $key => $value) {
                 if ($propertyAccessor->isWritable($object, $key) && self::isSameProperty($property->getName(), $key)) {
                     $types = self::getPropertyTypes($property);
-                    $value = self::parseValue($value, $types, new \ReflectionClass($property->class));
+                    $value = self::parseValue($value, $types, $property, $object);
                     $propertyAccessor->setValue($object, $key, $value);
                 }
             }
         }
+    }
+
+    /**
+     * setup
+     */
+    static private function setup()
+    {
+        self::registerParser(
+            [
+                new StringParser(),
+                new BooleanParser(),
+                new IntegerParser(),
+                new FloatParser(),
+                new DateTimeParser(),
+                new ObjectParser()
+            ]
+        );
     }
 
     /**
@@ -117,123 +163,30 @@ class Array2Object
     /**
      * Parse a value using given types
      *
-     * @param mixed            $value
-     * @param array            $types
-     * @param \ReflectionClass $context
+     * @param mixed               $value
+     * @param array               $types
+     * @param \ReflectionProperty $property
+     * @param object              $object
      *
      * @return array|bool|float|int|string
      */
-    static private function parseValue($value, $types, \ReflectionClass $context)
+    static private function parseValue($value, $types, \ReflectionProperty $property, $object)
     {
         foreach ($types as $type) {
 
-            switch ($type) {
-                case 'string':
-                    $value = (string)$value;
-                    break;
-                case 'integer':
-                case 'int':
-                    $value = (integer)$value;
-                    break;
-                case 'float':
-                case 'double':
-                    $value = (float)$value;
-                    break;
-                case 'bool':
-                case 'boolean':
-                    if (is_string($value)) {
-                        switch (strtoupper($value)) {
-                            case 'true':
-                            case 'yes':
-                                $value = true;
-                                break;
-                            case 'false':
-                            case 'no':
-                                $value = false;
-                                break;
-                            default:
-                                $value = (boolean)$value;
+            foreach (self::$parsers as $parser) {
+                if ($parser instanceof ValueParserInterface) {
+                    if (is_array($value) && strpos($type, '[]') !== false) {
+                        foreach ($value as $key => &$arrayValue) {
+                            $arrayValue = $parser->parseValue($arrayValue, str_replace('[]', null, $type), $property, $object);
                         }
                     } else {
-                        $value = (boolean)$value;
+                        $value = $parser->parseValue($value, $type, $property, $object);
                     }
-                    break;
-                case '\DateTime':
-                case 'DateTime':
-                    $value = new $type($value);
-                    break;
-                case 'array':
-                    if (is_array($value)) {
-                        foreach ($value as $key => $arrayValue) {
-                            $arrayType = [];
-                            if (array_key_exists(1, $types) && $types[1] !== 'array') {
-                                $arrayType = str_replace('[]', null, $types[1]);
-                            }
-                            $value[$key] = self::parseValue($arrayValue, [$arrayType], $context);
-                        }
-                    }
-                    break;
-                default:
-                    $value = self::valueToObject($value, $type, $context);
-
-            }
-        }
-
-        return $value;
-    }
-
-    /**
-     * Convert a array value into a object or array of objects
-     *
-     * @param  mixed           $value
-     * @param  string          $type
-     * @param \ReflectionClass $context
-     *
-     * @return array
-     */
-    static private function valueToObject($value, $type, \ReflectionClass $context)
-    {
-        $isArrayOfObjects = (strpos($type, '[]') !== false);
-        $type = str_replace('[]', null, $type);
-        $className = null;
-
-        //use the type as class
-        if (class_exists($type)) {
-            $className = $type;
-        }
-
-        //try to get the class from use statements in the class file
-        if ($className === null) {
-            $classContent = file_get_contents($context->getFileName());
-            preg_match("/use\s+([\w\\\]+$type);/", $classContent, $matches);
-            if (isset($matches[1]) && class_exists($matches[1])) {
-                $className = $matches[1];
-            }
-        }
-
-        //use the same namespace as class container
-        if ($className === null && class_exists($context->getNamespaceName() . "\\" . $type)) {
-            $className = $context->getNamespaceName() . "\\" . $type;
-        }
-
-        if (is_array($value) && $className !== null && class_exists($className)) {
-            //array of objects
-            if ($isArrayOfObjects) {
-                $newValue = [];
-                foreach ($value as $key => $item) {
-                    if (is_array($item)) {
-                        $newValue[$key] = self::createObject($className, $value);
-                    } else {
-                        $newValue[$key] = $item;
-                    }
+                } else {
+                    throw new \InvalidArgumentException(sprintf("%s is not a valid parser.", get_class($parser)));
                 }
-            } else { //simple object
-                $newValue = self::createObject($className, $value);
             }
-        }
-
-        if (isset($newValue)) {
-            $value = $newValue;
         }
 
         return $value;

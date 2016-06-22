@@ -10,19 +10,14 @@
 namespace Rafrsr\LibArray2Object\Tests\Fixtures;
 
 /**
- * Class Manager
+ * Class AbstractTeam
  */
-class Manager
+abstract class AbstractTeam
 {
     /**
      * @var string
      */
     protected $name;
-
-    /**
-     * @var float
-     */
-    protected $salary;
 
     /**
      * @return string
@@ -40,26 +35,6 @@ class Manager
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getSalary()
-    {
-        return $this->salary;
-    }
-
-    /**
-     * @param float $salary
-     *
-     * @return $this
-     */
-    public function setSalary($salary)
-    {
-        $this->salary = $salary;
 
         return $this;
     }
