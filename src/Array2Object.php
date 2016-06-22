@@ -179,7 +179,6 @@ class Array2Object
      */
     static private function valueToObject($value, $type, \ReflectionClass $context)
     {
-        $isArrayOfObjects = (strpos($type, '[]') !== false);
         $type = str_replace('[]', null, $type);
         $className = null;
 
@@ -203,25 +202,13 @@ class Array2Object
         }
 
         if ($className !== null && class_exists($className)) {
-            if ($isArrayOfObjects) {
-                $newValue = [];
-                if (is_array($value)) {
-                    foreach ($value as $item) {
-                        if (is_array($item)) {
-                            $childObject = new $className();
-                            self::populate($childObject, $item);
-                            $newValue[] = $childObject;
-                        } else {
-                            $newValue = $item;
-                        }
-                    }
-                }
-
-            } else {
-                if (is_array($value)) {
+            foreach ($value as $item) {
+                if (is_array($item)) {
                     $childObject = new $className();
-                    self::populate($childObject, $value);
-                    $newValue = $childObject;
+                    self::populate($childObject, $item);
+                    $newValue[] = $childObject;
+                } else {
+                    $newValue = $item;
                 }
             }
         }
