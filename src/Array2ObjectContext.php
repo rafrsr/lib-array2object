@@ -13,6 +13,8 @@ use Rafrsr\LibArray2Object\Writer\PropertyWriterInterface;
 
 class Array2ObjectContext extends AbstractContext
 {
+    use MatcherAwareTrait;
+
     /**
      * @var PropertyWriterInterface
      */

@@ -9,7 +9,7 @@
 
 namespace Rafrsr\LibArray2Object;
 
-use Rafrsr\LibArray2Object\Parser\ObjectParser;
+use Rafrsr\LibArray2Object\Matcher\CamelizeMatcher;
 use Rafrsr\LibArray2Object\Writer\AccessorWriter;
 use Rafrsr\LibArray2Object\Writer\PropertyWriterInterface;
 
@@ -18,6 +18,8 @@ use Rafrsr\LibArray2Object\Writer\PropertyWriterInterface;
  */
 class Array2ObjectBuilder extends AbstractBuilder
 {
+    use MatcherAwareTrait;
+
     /**
      * @var PropertyWriterInterface
      */
@@ -68,6 +70,7 @@ class Array2ObjectBuilder extends AbstractBuilder
 
         if ($context instanceof Array2ObjectContext) {
             $context->setWriter($this->getWriter() ?: new AccessorWriter());
+            $context->setMatcher($this->getMatcher() ?: new CamelizeMatcher());
         }
     }
 }

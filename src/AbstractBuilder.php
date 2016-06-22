@@ -9,8 +9,6 @@
 
 namespace Rafrsr\LibArray2Object;
 
-use Rafrsr\LibArray2Object\Matcher\CamelizeMatcher;
-use Rafrsr\LibArray2Object\Matcher\PropertyMatcherInterface;
 use Rafrsr\LibArray2Object\Parser\BooleanParser;
 use Rafrsr\LibArray2Object\Parser\DateTimeParser;
 use Rafrsr\LibArray2Object\Parser\FloatParser;
@@ -21,20 +19,12 @@ use Rafrsr\LibArray2Object\Parser\ValueParserInterface;
 
 abstract class AbstractBuilder
 {
+    use ParsersAwareTrait;
+
     /**
      * @var AbstractContext
      */
     private $context;
-
-    /**
-     * @var array|ValueParserInterface[]
-     */
-    private $parsers = [];
-
-    /**
-     * @var PropertyMatcherInterface
-     */
-    private $matcher;
 
     /**
      * @var array
@@ -69,14 +59,6 @@ abstract class AbstractBuilder
         $this->context = $context;
 
         return $this;
-    }
-
-    /**
-     * @return array|Parser\ValueParserInterface[]
-     */
-    public function getParsers()
-    {
-        return $this->parsers;
     }
 
     /**
@@ -152,49 +134,11 @@ abstract class AbstractBuilder
     }
 
     /**
-     * @param array|Parser\ValueParserInterface[] $parsers
-     *
-     * @return $this
-     */
-    public function setParsers($parsers)
-    {
-        $this->parsers = [];
-        foreach ($parsers as $parser) {
-            if ($parser instanceof ValueParserInterface) {
-                $this->parsers[$parser->getName()] = $parser;
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return PropertyMatcherInterface
-     */
-    public function getMatcher()
-    {
-        return $this->matcher;
-    }
-
-    /**
-     * @param PropertyMatcherInterface $matcher
-     *
-     * @return $this
-     */
-    public function setMatcher(PropertyMatcherInterface $matcher)
-    {
-        $this->matcher = $matcher;
-
-        return $this;
-    }
-
-    /**
      * @param AbstractContext $context
      */
     protected function prepareContext(AbstractContext $context)
     {
         //defaults
-        $context->setMatcher($this->getMatcher() ?: new CamelizeMatcher());
         $context->setParsers(
             [
                 new StringParser(),
