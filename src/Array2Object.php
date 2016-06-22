@@ -189,7 +189,7 @@ class Array2Object
         }
 
         //try to get the class from use statements in the class file
-        if (!$className) {
+        if ($className === null) {
             $classContent = file_get_contents($context->getFileName());
             preg_match("/use\s+([\w\\\]+$type);/", $classContent, $matches);
             if (isset($matches[1]) && class_exists($matches[1])) {
@@ -198,11 +198,11 @@ class Array2Object
         }
 
         //use the same namespace as class container
-        if (!$className && class_exists($context->getNamespaceName() . "\\" . $type)) {
+        if ($className === null && class_exists($context->getNamespaceName() . "\\" . $type)) {
             $className = $context->getNamespaceName() . "\\" . $type;
         }
 
-        if ($className && class_exists($className)) {
+        if ($className !== null && class_exists($className)) {
             if ($isArrayOfObjects) {
                 $newValue = [];
                 if (is_array($value)) {
