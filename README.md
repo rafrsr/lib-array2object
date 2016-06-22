@@ -89,6 +89,7 @@ $property
 | string         | Primitive string                                                        |
 | array          | An array with arbitrary keys, and values.                               |
 | array\|\<Object\>[]| Array of *\<Object\>* instance. The _\<Object\>_ should be the class to use. |
+| DateTime       | Instance of \DateTime class                                             |
 
 ### Property Names
 
