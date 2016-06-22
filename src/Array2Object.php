@@ -29,7 +29,7 @@ class Array2Object
     /**
      * @var array|ValueParserInterface
      */
-    private static $parsers;
+    private static $parsers = [];
 
     /**
      * @var PropertyMatcherInterface
