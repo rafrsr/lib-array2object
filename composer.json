@@ -1,0 +1,36 @@
+{
+  "name": "rafrsr/lib-array2object",
+  "description": "Array to object conversion library",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Rafael SR",
+      "email": "raf.rsr@gmail.com",
+      "homepage": "https://github.com/rafrsr"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Rafrsr\\LibArray2Object\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Rafrsr\\LibArray2Object\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">=5.4",
+    "symfony/property-access": "^3.0|^2.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.0",
+    "satooshi/php-coveralls": "^1.0"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}
