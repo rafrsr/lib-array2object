@@ -17,33 +17,36 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
 {
     public function testArray2Object()
     {
-        $teamArray
-            = [
+        $teamArray = [
             'name' => 'Dream Team',
             'Manager' => ['name' => 'Big Manager'],
             'createdAt' => '2016-01-01',
             'points' => '25',
-            'players' =>
+            'players' => [
                 [
-                    [
-                        'name' => 'Player 1',
-                        'number' => '1',
-                        'height' => '1.80',
-                        'regular' => 'true'
-                    ],
-                    [
-                        'name' => 'Player 2',
-                        'number' => '2',
-                        'height' => '1.85',
-                        'regular' => 'false'
-                    ]
+                    'name' => 'Player 1',
+                    'number' => '1',
+                    'height' => '1.80',
+                    'regular' => 'true'
                 ],
+                [
+                    'name' => 'Player 2',
+                    'number' => '2',
+                    'height' => '1.85',
+                    'regular' => 0
+                ],
+                [
+                    'name' => 'Player 3',
+                    'number' => '3',
+                    'height' => '1.78',
+                    'regular' => 'yes'
+                ]
+            ],
             'scores' => [
                 '2016' => '29',
                 '2015' => '28',
                 '2014' => '30',
             ]
-
         ];
 
         /** @var Team $team */
@@ -64,10 +67,13 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
         static::assertEquals(1.85, $team->getPlayers()[1]->getHeight());
         static::assertFalse($team->getPlayers()[1]->isRegular());
 
+        static::assertTrue($team->getPlayers()[2]->isRegular());
+
         static::assertInternalType('string', $team->getName());
         static::assertInternalType('integer', $team->getPoints());
         static::assertInternalType('boolean', $team->getPlayers()[0]->isRegular());
         static::assertInternalType('float', $team->getPlayers()[0]->getHeight());
+        static::assertInternalType('boolean', $team->getPlayers()[2]->isRegular());
         static::assertInternalType('integer', $team->getScores()[2016]);
     }
 }

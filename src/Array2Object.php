@@ -141,10 +141,19 @@ class Array2Object
                     break;
                 case 'bool':
                 case 'boolean':
-                    if (is_string($value) && strtolower($value) === 'false') {
-                        $value = false;
-                    } elseif (is_string($value) && strtolower($value) === 'true') {
-                        $value = true;
+                    if (is_string($value)) {
+                        switch (strtoupper($value)) {
+                            case 'true':
+                            case 'yes':
+                                $value = true;
+                                break;
+                            case 'false':
+                            case 'no':
+                                $value = false;
+                                break;
+                            default:
+                                $value = (boolean)$value;
+                        }
                     } else {
                         $value = (boolean)$value;
                     }
@@ -213,7 +222,7 @@ class Array2Object
                 $newValue = [];
                 foreach ($value as $key => $item) {
                     if (is_array($item)) {
-                        $newValue[$key] = self::createObject($className, $value);;
+                        $newValue[$key] = self::createObject($className, $value);
                     } else {
                         $newValue[$key] = $item;
                     }
