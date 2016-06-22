@@ -15,9 +15,32 @@ namespace Rafrsr\LibArray2Object\Tests\Fixtures;
 abstract class AbstractTeam
 {
     /**
+     * @var integer
+     */
+    protected $id;
+
+    /**
      * @var string
      */
     protected $name;
+
+    /**
+     * AbstractTeam constructor.
+     *
+     * @param string $name
+     */
+    public function __construct($name = null)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @return string
@@ -37,5 +60,13 @@ abstract class AbstractTeam
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function __toString()
+    {
+        return (string)$this->getName();
     }
 }

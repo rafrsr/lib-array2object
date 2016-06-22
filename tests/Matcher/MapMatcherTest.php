@@ -7,18 +7,23 @@
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
 
-namespace Rafrsr\LibArray2Object\Tests\PropertyMatcher;
+namespace Rafrsr\LibArray2Object\Tests\Matcher;
 
-use Rafrsr\LibArray2Object\PropertyMatcher\CamelizeMatcher;
+use Rafrsr\LibArray2Object\Matcher\MapMatcher;
 
-class CamelizeMatcherTester extends PropertyMatcherTester
+class MapMatcherTest extends PropertyMatcherTester
 {
     /**
      * @inheritDoc
      */
     public function buildMatcher()
     {
-        return new CamelizeMatcher();
+        return new MapMatcher(
+            [
+                'test' => 'prueba',
+                'name' => 'nombre'
+            ]
+        );
     }
 
     /**
@@ -27,12 +32,8 @@ class CamelizeMatcherTester extends PropertyMatcherTester
     public function getEquals()
     {
         return [
-            'test' => 'test',
-            'Test' => 'Test',
-            'ErrorCode' => 'error_code',
-            'errorCode' => 'error_code',
-            'errorcode' => 'error_code',
-            'errorCodes' => 'errorcodes',
+            'test' => 'prueba',
+            'name' => 'nombre',
         ];
     }
 
@@ -42,7 +43,7 @@ class CamelizeMatcherTester extends PropertyMatcherTester
     public function getNotEquals()
     {
         return [
-            'test' => 'testing'
+            'test' => 'name'
         ];
     }
 }

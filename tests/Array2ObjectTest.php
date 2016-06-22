@@ -9,9 +9,9 @@
 
 namespace Rafrsr\LibArray2Object\Tests;
 
-use Rafrsr\LibArray2Object\Array2Object;
+use Rafrsr\LibArray2Object\Array2ObjectBuilder;
 use Rafrsr\LibArray2Object\Parser\CallableParser;
-use Rafrsr\LibArray2Object\PropertyMatcher\MapMatcher;
+use Rafrsr\LibArray2Object\Matcher\MapMatcher;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 
 class Array2ObjectTest extends \PHPUnit_Framework_TestCase
@@ -19,6 +19,7 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
     public function testArray2Object()
     {
         $teamArray = [
+            'id' => 1,//read-only
             'name' => 'Dream Team',
             'Manager' => [
                 'name' => 'Big Manager',
@@ -54,20 +55,21 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
         ];
 
         //register custom parser
-        Array2Object::registerParser(
+        $array2Object = Array2ObjectBuilder::create()->addParser(
             new CallableParser(
                 function ($value, $type, \ReflectionProperty $property, $object) {
-                    if ($property->name === 'salary') {
+                    if ($property->getName() === 'salary') {
                         $value = str_replace('$', null, $value);
                     }
 
                     return $value;
                 }
             )
-        );
+        )->build();
 
         /** @var Team $team */
-        $team = Array2Object::createObject(Team::class, $teamArray);
+        $team = $array2Object->createObject(Team::class, $teamArray);
+        static::assertNull($team->getId());
         static::assertEquals('Dream Team', $team->getName());
         static::assertEquals(25, $team->getPoints());
         static::assertEquals(29, $team->getScores()[2016]);
@@ -100,33 +102,33 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
             'name' => 'New Name'
         ];
 
-        Array2Object::populate($team, $teamArray);
+        $array2Object->populate($team, $teamArray);
         static::assertEquals('New Name', $team->getName());
     }
 
     public function testPopulateObjectError()
     {
         static::setExpectedException('\InvalidArgumentException');
-        Array2Object::populate(Team::class, []);
+        Array2ObjectBuilder::create()->build()->populate(Team::class, []);
     }
 
     public function testCreateObjectError()
     {
         static::setExpectedException('\InvalidArgumentException');
-        Array2Object::createObject(new Team(), []);
+        Array2ObjectBuilder::create()->build()->createObject(new Team(), []);
     }
 
     public function testSettingPropertyMatcher()
     {
-        Array2Object::setPropertyMatcher(
+        $array2Object = Array2ObjectBuilder::create()->setPropertyMatcher(
             new MapMatcher(
                 [
                     'name' => 'nombre'
                 ]
             )
-        );
+        )->build();
         /** @var Team $team */
-        $team = Array2Object::createObject(Team::class, ['nombre' => 'Team']);
+        $team = $array2Object->createObject(Team::class, ['nombre' => 'Team']);
         static::assertEquals('Team', $team->getName());
     }
 }

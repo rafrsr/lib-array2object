@@ -7,9 +7,9 @@
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
 
-namespace Rafrsr\LibArray2Object\Tests\PropertyMatcher;
+namespace Rafrsr\LibArray2Object\Tests\Matcher;
 
-use Rafrsr\LibArray2Object\PropertyMatcher\LevenshteinMatcher;
+use Rafrsr\LibArray2Object\Matcher\LevenshteinMatcher;
 
 class LevenshteinMatcherTest extends PropertyMatcherTester
 {

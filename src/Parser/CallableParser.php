@@ -32,6 +32,15 @@ class CallableParser implements ValueParserInterface
     /**
      * @inheritDoc
      */
+    public function getName()
+    {
+        //unique name for each callback
+        return spl_object_hash($this->parserCallback);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function parseValue($value, $type, \ReflectionProperty $property, $object)
     {
         return call_user_func($this->parserCallback, $value, $type, $property, $object);

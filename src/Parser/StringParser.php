@@ -11,6 +11,16 @@ namespace Rafrsr\LibArray2Object\Parser;
 
 class StringParser implements ValueParserInterface
 {
+    const NAME = 'string';
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return self::NAME;
+    }
+
     /**
      * @inheritDoc
      */

@@ -8,61 +8,11 @@ Array to object conversion library. Convert a array to a object using simple and
 
 ## Usage
 
-Having the following classes:
-
-````php
-class Team
-{
-    /**
-     * @var string
-     */
-    protected $name;
-    
-     /**
-     * @var array|Player[]
-     */
-    protected $players;
-
-    //getters and setters
-}
-
-class Player
-{
-    /**
-     * @var string
-     */
-    protected $name;
-    
-    /**
-     * @var integer
-     */
-    protected $number;
-    
-    //getters and setters
-}
-````
-
-And this array
-
-````php
-$teamArray = [
-    'name' => 'Dream Team',
-    'players' =>
-        [
-          [
-            'name' => 'Player 1',
-            'number' => '1',
-          ]
-        ],
-    ];
-````
-
 Can use:
 
 ````php
-    $team = Array2Object::createObject(Team::class, $teamArray);
-    echo $team->getName(); //Dream Team
-    echo $team->getPlayers()[0]->getName() //Player 1
+    $person = Array2ObjectBuilder::create()->build()->createObject(Person::class, ['name' => 'David Smith', 'age' => '18']);
+    echo $person->getName(); //David Smith
 ````
 
 ## How it works

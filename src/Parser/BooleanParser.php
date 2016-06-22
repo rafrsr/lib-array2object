@@ -11,6 +11,16 @@ namespace Rafrsr\LibArray2Object\Parser;
 
 class BooleanParser implements ValueParserInterface
 {
+    const NAME = 'boolean';
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return self::NAME;
+    }
+
     /**
      * @inheritDoc
      */

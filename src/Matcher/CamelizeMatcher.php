@@ -7,7 +7,7 @@
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
 
-namespace Rafrsr\LibArray2Object\PropertyMatcher;
+namespace Rafrsr\LibArray2Object\Matcher;
 
 class CamelizeMatcher implements PropertyMatcherInterface
 {

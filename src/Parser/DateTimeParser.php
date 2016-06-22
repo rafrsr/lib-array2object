@@ -11,6 +11,16 @@ namespace Rafrsr\LibArray2Object\Parser;
 
 class DateTimeParser implements ValueParserInterface
 {
+    const NAME = 'datetime';
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return self::NAME;
+    }
+
     /**
      * @inheritDoc
      */

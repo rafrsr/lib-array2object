@@ -9,16 +9,7 @@
 
 namespace Rafrsr\LibArray2Object;
 
-use Rafrsr\LibArray2Object\Parser\BooleanParser;
-use Rafrsr\LibArray2Object\Parser\DateTimeParser;
-use Rafrsr\LibArray2Object\Parser\FloatParser;
-use Rafrsr\LibArray2Object\Parser\IntegerParser;
-use Rafrsr\LibArray2Object\Parser\ObjectParser;
-use Rafrsr\LibArray2Object\Parser\StringParser;
 use Rafrsr\LibArray2Object\Parser\ValueParserInterface;
-use Rafrsr\LibArray2Object\PropertyMatcher\CamelizeMatcher;
-use Rafrsr\LibArray2Object\PropertyMatcher\PropertyMatcherInterface;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
  * Using the property names and the common property annotations
@@ -27,39 +18,36 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 class Array2Object
 {
     /**
-     * @var array|ValueParserInterface
+     * @var Array2ObjectContext
      */
-    private static $parsers = [];
+    private $context;
 
     /**
-     * @var PropertyMatcherInterface
+     * Array2Object constructor.
      */
-    private static $propertyMatcher;
-
-    /**
-     * registerParser
-     *
-     * @param ValueParserInterface|array $parsers
-     */
-    static public function registerParser($parsers)
+    public function __construct(Array2ObjectContext $context)
     {
-        if (is_array($parsers)) {
-            foreach ($parsers as $parser) {
-                self::$parsers[] = $parser;
-            }
-        } else {
-            self::$parsers[] = $parsers;
-        }
+        $this->context = $context;
     }
 
     /**
-     * @param PropertyMatcherInterface $propertyMatcher
+     * @return Array2ObjectContext
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    /**
+     * @param Array2ObjectContext $context
      *
      * @return $this
      */
-    public static function setPropertyMatcher(PropertyMatcherInterface $propertyMatcher)
+    public function setContext(Array2ObjectContext $context)
     {
-        self::$propertyMatcher = $propertyMatcher;
+        $this->context = $context;
+
+        return $this;
     }
 
     /**
@@ -72,7 +60,7 @@ class Array2Object
      *
      * @throws \InvalidArgumentException
      */
-    static public function createObject($class, array $data)
+    public function createObject($class, array $data)
     {
         if (is_string($class) && class_exists($class)) {
             $object = new $class;
@@ -80,7 +68,7 @@ class Array2Object
             throw new \InvalidArgumentException('The first argument should be a valid class, can use ::populate with objects');
         }
 
-        self::populate($object, $data);
+        $this->populate($object, $data);
 
         return $object;
     }
@@ -91,48 +79,25 @@ class Array2Object
      *
      * @throws \InvalidArgumentException
      */
-    static public function populate($object, array $data)
+    public function populate($object, array $data)
     {
-        self::setup();//register parsers
-
         if (!is_object($object)) {
             throw new \InvalidArgumentException('The first param should be a object.');
         }
 
-        $propertyAccessor = new PropertyAccessor();
-
         $reflClass = new \ReflectionClass($object);
 
-        foreach (self::getClassProperties($reflClass) as $property) {
+        foreach ($this->getClassProperties($reflClass) as $property) {
             foreach ($data as $key => $value) {
-                if ($propertyAccessor->isWritable($object, $property->getName()) && self::$propertyMatcher->match($property, $key)) {
-                    $types = self::getPropertyTypes($property);
-                    $value = self::parseValue($value, $types, $property, $object);
-                    $propertyAccessor->setValue($object, $property->getName(), $value);
+                if ($this->context->getMatcher()->match($property, $key)
+                    && $this->context->getWriter()->isWritable($object, $property->getName())
+                ) {
+                    $types = $this->getPropertyTypes($property);
+                    $value = $this->parseValue($value, $types, $property, $object);
+                    $this->context->getWriter()->setValue($object, $property->getName(), $value);
                 }
             }
         }
-    }
-
-    /**
-     * setup
-     */
-    static private function setup()
-    {
-        if (!self::$propertyMatcher) {
-            self::$propertyMatcher = new CamelizeMatcher();
-        }
-
-        self::registerParser(
-            [
-                new StringParser(),
-                new BooleanParser(),
-                new IntegerParser(),
-                new FloatParser(),
-                new DateTimeParser(),
-                new ObjectParser()
-            ]
-        );
     }
 
     /**
@@ -142,7 +107,7 @@ class Array2Object
      *
      * @return array|\ReflectionProperty[]
      */
-    static private function getClassProperties(\ReflectionClass $refClass)
+    private function getClassProperties(\ReflectionClass $refClass)
     {
         $props = $refClass->getProperties();
         $props_arr = [];
@@ -152,7 +117,7 @@ class Array2Object
             $props_arr[$f] = $prop;
         }
         if ($parentClass = $refClass->getParentClass()) {
-            $parent_props_arr = self::getClassProperties($parentClass);//RECURSION
+            $parent_props_arr = $this->getClassProperties($parentClass);//RECURSION
             if (count($parent_props_arr) > 0) {
                 $props_arr = array_merge($parent_props_arr, $props_arr);
             }
@@ -171,11 +136,11 @@ class Array2Object
      *
      * @return array|bool|float|int|string
      */
-    static private function parseValue($value, $types, \ReflectionProperty $property, $object)
+    private function parseValue($value, $types, \ReflectionProperty $property, $object)
     {
         foreach ($types as $type) {
 
-            foreach (self::$parsers as $parser) {
+            foreach ($this->context->getParsers() as $parser) {
                 if ($parser instanceof ValueParserInterface) {
                     if (is_array($value) && strpos($type, '[]') !== false) {
                         foreach ($value as $key => &$arrayValue) {
@@ -198,7 +163,7 @@ class Array2Object
      *
      * @return array
      */
-    static private function getPropertyTypes(\ReflectionProperty $property)
+    private function getPropertyTypes(\ReflectionProperty $property)
     {
         $doc = $property->getDocComment();
         preg_match('/@var\s([\w\\\|\[\]]+)/', $doc, $matches);

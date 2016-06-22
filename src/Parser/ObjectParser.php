@@ -10,9 +10,32 @@
 namespace Rafrsr\LibArray2Object\Parser;
 
 use Rafrsr\LibArray2Object\Array2Object;
+use Rafrsr\LibArray2Object\Array2ObjectContext;
 
 class ObjectParser implements ValueParserInterface
 {
+    const NAME = 'object';
+
+    protected $array2Object;
+
+    /**
+     * ObjectParser constructor.
+     *
+     * @param Array2ObjectContext $context
+     */
+    public function __construct(Array2ObjectContext $context)
+    {
+        $this->array2Object = new Array2Object($context);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return self::NAME;
+    }
+
     /**
      * @inheritDoc
      */
@@ -41,7 +64,7 @@ class ObjectParser implements ValueParserInterface
         }
 
         if (is_array($value) && $className !== null && class_exists($className)) {
-            return Array2Object::createObject($className, $value);
+            return $this->array2Object->createObject($className, $value);
         }
 
         return $value;

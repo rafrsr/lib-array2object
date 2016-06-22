@@ -11,6 +11,16 @@ namespace Rafrsr\LibArray2Object\Parser;
 
 class FloatParser implements ValueParserInterface
 {
+    const NAME = 'float';
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return self::NAME;
+    }
+
     /**
      * @inheritDoc
      */

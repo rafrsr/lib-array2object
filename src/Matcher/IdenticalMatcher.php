@@ -7,17 +7,15 @@
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
 
-namespace Rafrsr\LibArray2Object\PropertyMatcher;
+namespace Rafrsr\LibArray2Object\Matcher;
 
-class LevenshteinMatcher implements PropertyMatcherInterface
+class IdenticalMatcher implements PropertyMatcherInterface
 {
     /**
      * @inheritDoc
      */
     public function match(\ReflectionProperty $property, $givenName)
     {
-        $lev = levenshtein($property->getName(), $givenName);
-
-        return ($lev <= strlen($property->getName()) / 3);
+        return ($property->getName() === $givenName);
     }
 }

@@ -7,18 +7,22 @@
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
 
-namespace Rafrsr\LibArray2Object\Tests\PropertyMatcher;
+namespace Rafrsr\LibArray2Object\Tests\Matcher;
 
-use Rafrsr\LibArray2Object\PropertyMatcher\IdenticalMatcher;
+use Rafrsr\LibArray2Object\Matcher\CallableMatcher;
 
-class IdenticalMatcherTest extends PropertyMatcherTester
+class CallableMatcherTest extends PropertyMatcherTester
 {
     /**
      * @inheritDoc
      */
     public function buildMatcher()
     {
-        return new IdenticalMatcher();
+        return new CallableMatcher(
+            function (\ReflectionProperty $property, $givenName) {
+                return ($givenName === 'prueba' && $property->getName() === 'test');
+            }
+        );
     }
 
     /**
@@ -27,7 +31,7 @@ class IdenticalMatcherTest extends PropertyMatcherTester
     public function getEquals()
     {
         return [
-            'test' => 'test'
+            'test' => 'prueba'
         ];
     }
 
@@ -37,7 +41,7 @@ class IdenticalMatcherTest extends PropertyMatcherTester
     public function getNotEquals()
     {
         return [
-            'test' => 'Test'
+            'test' => 'name'
         ];
     }
 }

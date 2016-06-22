@@ -11,6 +11,16 @@ namespace Rafrsr\LibArray2Object\Parser;
 
 class IntegerParser implements ValueParserInterface
 {
+    const NAME = 'integer';
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return self::NAME;
+    }
+
     /**
      * @inheritDoc
      */

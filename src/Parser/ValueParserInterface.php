@@ -15,6 +15,13 @@ namespace Rafrsr\LibArray2Object\Parser;
 interface ValueParserInterface
 {
     /**
+     * get parse name
+     *
+     * @return string
+     */
+    public function getName();
+
+    /**
      * parseValue
      *
      * @param  mixed              $value    current value
