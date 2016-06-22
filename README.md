@@ -6,55 +6,14 @@
 
 Array to object conversion library. Convert a array to a object using simple and common property annotations
 
-## Usage
+## Installation
 
-Can use:
+1. [Install composer](https://getcomposer.org/download/)
+2. Execute: `composer require rafrsr/lib-array2object`
 
-````php
-    $person = Array2ObjectBuilder::create()->build()->createObject(Person::class, ['name' => 'David Smith', 'age' => '18']);
-    echo $person->getName(); //David Smith
-````
+## Documentation
 
-## How it works
-
-This library only use phpDocBloc common properties like `@var` and try to resolve the type of data or related object.
-
-### Example:
-
-````php 
-/** @var integer **/
-$property
-````
-
-### Available types:
-
-| Type           | Description                                                             |
-|----------------|-------------------------------------------------------------------------|
-| integer        | Primitive integer                                                       |
-| int            | Primitive integer                                                       |
-| boolean        | Primitive boolean                                                       |
-| bool           | Primitive boolean                                                       |
-| float          | Primitive float                                                         |
-| double         | Primitive float                                                         |
-| string         | Primitive string                                                        |
-| array          | An array with arbitrary keys, and values.                               |
-| array\|\<type\>[]| Array of *\<Type\>*. The _\<type\>_ should be one scalar type. |
-| array\|\<Object\>[]| Array of *\<Object\>* instance. The _\<Object\>_ should be the class to use. |
-| DateTime       | Instance of \DateTime class                                             |
-
-### Property Names
-
-Property names are compared using some versions of the same property name.
-
-`$propertyName -> 'propertyName' -> 'property_name' -> propertyname`
-
-### Setters
-
-Setters methods are required to set the property value, otherwise the property is not settled.
-
-````php
-public function setPropertyName()
-````
+Full documentation are available on the [wiki page](https://github.com/rafrsr/lib-array2object/wiki)
 
 ## Copyright
 
