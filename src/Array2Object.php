@@ -85,16 +85,20 @@ class Array2Object
             throw new \InvalidArgumentException('The first param should be a object.');
         }
 
-        $reflClass = new \ReflectionClass($object);
+        if ($object instanceof Array2ObjectInterface) {
+            $object->__populate($this, $data);
+        } else {
+            $reflClass = new \ReflectionClass($object);
 
-        foreach ($this->getClassProperties($reflClass) as $property) {
-            foreach ($data as $key => $value) {
-                if ($this->context->getMatcher()->match($property, $key)
-                    && $this->context->getWriter()->isWritable($object, $property->getName())
-                ) {
-                    $types = $this->getPropertyTypes($property);
-                    $value = $this->parseValue($value, $types, $property, $object);
-                    $this->context->getWriter()->setValue($object, $property->getName(), $value);
+            foreach ($this->getClassProperties($reflClass) as $property) {
+                foreach ($data as $key => $value) {
+                    if ($this->context->getMatcher()->match($property, $key)
+                        && $this->context->getWriter()->isWritable($object, $property->getName())
+                    ) {
+                        $types = $this->getPropertyTypes($property);
+                        $value = $this->parseValue($value, $types, $property, $object);
+                        $this->context->getWriter()->setValue($object, $property->getName(), $value);
+                    }
                 }
             }
         }
