@@ -119,7 +119,7 @@ class Array2Object
 
             foreach ($this->context->getParsers() as $parser) {
                 if ($parser instanceof ValueParserInterface) {
-                    if (is_array($value) && preg_match('/[\w\d_]+\[\]/', $type)) {
+                    if (is_array($value) && strpos($type, '[]') !== false) {
 
                         //support for nesting children
                         //https://github.com/rafrsr/lib-array2object/issues/1
