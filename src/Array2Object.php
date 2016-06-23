@@ -120,6 +120,13 @@ class Array2Object
             foreach ($this->context->getParsers() as $parser) {
                 if ($parser instanceof ValueParserInterface) {
                     if (is_array($value) && strpos($type, '[]') !== false) {
+
+                        //support for nesting children
+                        //https://github.com/rafrsr/lib-array2object/issues/1
+                        if (count($value) === 1 && array_key_exists(0, current($value))) {
+                            $value = current($value);
+                        }
+
                         foreach ($value as $key => &$arrayValue) {
                             $arrayValue = $parser->toObjectValue($arrayValue, str_replace('[]', null, $type), $property, $object);
                         }
