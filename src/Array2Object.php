@@ -123,7 +123,7 @@ class Array2Object
 
                         //support for nesting children
                         //https://github.com/rafrsr/lib-array2object/issues/1
-                        if (count($value) === 1 && array_key_exists(0, current($value))) {
+                        if (count($value) === 1 && is_array(current($value)) && array_key_exists(0, current($value))) {
                             $value = current($value);
                         }
 
