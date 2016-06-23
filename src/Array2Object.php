@@ -126,15 +126,21 @@ class Array2Object
                         if (count($value) === 1 && is_array(current($value))) {
                             if (array_key_exists(0, current($value))) {
                                 $value = current($value);
-                            } elseif (in_array('[]', $types, true)) {
-                                //https://github.com/rafrsr/lib-array2object/issues/1#issuecomment-228155603
-                                $value = [current($value)];
                             }
                         }
 
-                        foreach ($value as $key => &$arrayValue) {
-                            $arrayValue = $parser->toObjectValue($arrayValue, str_replace('[]', null, $type), $property, $object);
+                        $tmpArray = [];
+                        foreach ($value as $key => $arrayValue) {
+                            $parsedValue = $parser->toObjectValue($arrayValue, str_replace('[]', null, $type), $property, $object);
+                            //the annotation [] is used alone to ignore array keys
+                            if (in_array('[]', $types, true)) {
+                                $tmpArray[] = $parsedValue;
+                            } else {
+                                $tmpArray[$key] = $parsedValue;
+                            }
                         }
+                        $value = $tmpArray;
+
                     } else {
                         $value = $parser->toObjectValue($value, str_replace('[]', null, $type), $property, $object);
                     }
