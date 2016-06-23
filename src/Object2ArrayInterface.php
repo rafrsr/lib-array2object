@@ -13,11 +13,8 @@ interface Object2ArrayInterface
 {
     /**
      * Create array from current object,
-     * can use the $array2Object instance to create relations
-     *
-     * @param Object2Array $object2Array processor instance to populate
      *
      * @return array
      */
-    public function __toArray(Object2Array $object2Array);
+    public function __toArray();
 }

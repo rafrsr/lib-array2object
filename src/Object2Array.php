@@ -62,7 +62,15 @@ class Object2Array
 
         $array = [];
         if ($object instanceof Object2ArrayInterface) {
-            $array = $object->__toArray($this);
+            $array = $object->__toArray();
+            array_walk_recursive(
+                $array,
+                function (&$item) {
+                    if (is_object($item)) {
+                        $item = $this->createArray($item);
+                    }
+                }
+            );
         } else {
             $reflClass = new \ReflectionClass($object);
 

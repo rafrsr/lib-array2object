@@ -119,13 +119,13 @@ class Game implements Array2ObjectInterface, Object2ArrayInterface
     /**
      * @inheritDoc
      */
-    public function __toArray(Object2Array $object2Array)
+    public function __toArray()
     {
         return [
             'date' => $this->getDate()->format('Y-m-d'),
             'stadium' => $this->getStadiumName(),
-            'homeClub' => $object2Array->createArray($this->getHomeClub()),
-            'visitor' => $object2Array->createArray($this->getVisitor()),
+            'homeClub' => $this->getHomeClub(),
+            'visitor' => $this->getVisitor(),
         ];
     }
 }
