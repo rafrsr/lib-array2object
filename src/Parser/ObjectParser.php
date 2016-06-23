@@ -51,6 +51,9 @@ class ObjectParser implements ValueParserInterface
      */
     public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
+        //remove array indicator
+        $type = str_replace('[]', null, $type);
+
         $className = null;
         $context = new \ReflectionClass($property->class);
 

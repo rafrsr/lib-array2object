@@ -128,7 +128,7 @@ class Array2Object
                         }
 
                         foreach ($value as $key => &$arrayValue) {
-                            $arrayValue = $parser->toObjectValue($arrayValue, str_replace('[]', null, $type), $property, $object);
+                            $arrayValue = $parser->toObjectValue($arrayValue, $type, $property, $object);
                         }
                     } else {
                         $value = $parser->toObjectValue($value, $type, $property, $object);
