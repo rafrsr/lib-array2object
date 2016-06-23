@@ -27,7 +27,7 @@ class Team extends AbstractTeam
     protected $points;
 
     /**
-     * @var array|Player[]
+     * @var array|Player[]|[]
      */
     protected $players;
 

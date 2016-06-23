@@ -131,7 +131,6 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        //register custom parser
         $array2Object = Array2ObjectBuilder::create()->build();
 
         /** @var Team $team */
@@ -147,6 +146,32 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
         static::assertEquals(2, $team->getPlayers()[1]->getNumber());
         static::assertEquals(1.85, $team->getPlayers()[1]->getHeight());
         static::assertFalse($team->getPlayers()[1]->isRegular());
+    }
+
+    public function testArray2ObjectWithNestingChildrenOnlyOne(){
+        //with only one children
+        //https://github.com/rafrsr/lib-array2object/issues/1#issuecomment-228155603
+        $teamArray = [
+            'name' => 'Dream Team',
+            'players' => [
+                'player' => [
+                    'name' => 'Player 1',
+                    'number' => '1',
+                    'height' => '1.80',
+                    'regular' => 'true'
+                ],
+            ]
+        ];
+
+        $array2Object = Array2ObjectBuilder::create()->build();
+
+        /** @var Team $team */
+        $team = $array2Object->createObject(Team::class, $teamArray);
+        static::assertEquals('Dream Team', $team->getName());
+        static::assertEquals('Player 1', $team->getPlayers()[0]->getName());
+        static::assertEquals(1, $team->getPlayers()[0]->getNumber());
+        static::assertEquals(1.80, $team->getPlayers()[0]->getHeight());
+        static::assertTrue($team->getPlayers()[0]->isRegular());
     }
 
     public function testPopulateObjectError()

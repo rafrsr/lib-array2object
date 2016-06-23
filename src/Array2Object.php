@@ -119,12 +119,17 @@ class Array2Object
 
             foreach ($this->context->getParsers() as $parser) {
                 if ($parser instanceof ValueParserInterface) {
-                    if (is_array($value) && strpos($type, '[]') !== false) {
+                    if (is_array($value) && preg_match('/[\w\d_]+\[\]/', $type)) {
 
                         //support for nesting children
                         //https://github.com/rafrsr/lib-array2object/issues/1
-                        if (count($value) === 1 && is_array(current($value)) && array_key_exists(0, current($value))) {
-                            $value = current($value);
+                        if (count($value) === 1 && is_array(current($value))) {
+                            if (array_key_exists(0, current($value))) {
+                                $value = current($value);
+                            } elseif (in_array('[]', $types, true)) {
+                                //https://github.com/rafrsr/lib-array2object/issues/1#issuecomment-228155603
+                                $value = [current($value)];
+                            }
                         }
 
                         foreach ($value as $key => &$arrayValue) {
