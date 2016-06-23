@@ -86,7 +86,7 @@ class Array2Object
         }
 
         if ($object instanceof Array2ObjectInterface) {
-            $object->__populate($this, $data);
+            $object->__populate($data);
         } else {
             $reflClass = new \ReflectionClass($object);
             foreach (Utils::getClassProperties($reflClass) as $property) {

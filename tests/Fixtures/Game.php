@@ -10,8 +10,8 @@
 namespace Rafrsr\LibArray2Object\Tests\Fixtures;
 
 use Rafrsr\LibArray2Object\Array2Object;
+use Rafrsr\LibArray2Object\Array2ObjectBuilder;
 use Rafrsr\LibArray2Object\Array2ObjectInterface;
-use Rafrsr\LibArray2Object\Object2Array;
 use Rafrsr\LibArray2Object\Object2ArrayInterface;
 
 class Game implements Array2ObjectInterface, Object2ArrayInterface
@@ -108,10 +108,12 @@ class Game implements Array2ObjectInterface, Object2ArrayInterface
     /**
      * @inheritDoc
      */
-    public function __populate(Array2Object $array2Object, array $data)
+    public function __populate(array $data)
     {
         $this->setDate(new \DateTime($data['date']));
         $this->setStadiumName($data['stadium']);
+
+        $array2Object = Array2ObjectBuilder::create()->build();
         $this->setHomeClub($array2Object->createObject(Team::class, $data['homeClub']));
         $this->setVisitor($array2Object->createObject(Team::class, $data['visitor']));
     }
