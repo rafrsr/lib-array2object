@@ -9,6 +9,7 @@
 
 namespace Rafrsr\LibArray2Object;
 
+use Rafrsr\LibArray2Object\Parser\ArrayParser;
 use Rafrsr\LibArray2Object\Parser\BooleanParser;
 use Rafrsr\LibArray2Object\Parser\DateTimeParser;
 use Rafrsr\LibArray2Object\Parser\FloatParser;
@@ -147,6 +148,7 @@ abstract class AbstractBuilder
                 new IntegerParser(),
                 new FloatParser(),
                 new DateTimeParser(),
+                new ArrayParser(),
                 new ObjectParser($context)
             ]
         );
