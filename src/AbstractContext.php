@@ -9,6 +9,8 @@
 
 namespace Rafrsr\LibArray2Object;
 
+use Rafrsr\LibArray2Object\Traits\ParsersAwareTrait;
+
 abstract class AbstractContext
 {
     use ParsersAwareTrait;

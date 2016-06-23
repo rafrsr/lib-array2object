@@ -16,6 +16,7 @@ use Rafrsr\LibArray2Object\Parser\IntegerParser;
 use Rafrsr\LibArray2Object\Parser\ObjectParser;
 use Rafrsr\LibArray2Object\Parser\StringParser;
 use Rafrsr\LibArray2Object\Parser\ValueParserInterface;
+use Rafrsr\LibArray2Object\Traits\ParsersAwareTrait;
 
 abstract class AbstractBuilder
 {

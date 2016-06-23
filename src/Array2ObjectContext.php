@@ -9,6 +9,7 @@
 
 namespace Rafrsr\LibArray2Object;
 
+use Rafrsr\LibArray2Object\Traits\MatcherAwareTrait;
 use Rafrsr\LibArray2Object\Writer\PropertyWriterInterface;
 
 class Array2ObjectContext extends AbstractContext

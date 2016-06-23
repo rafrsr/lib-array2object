@@ -10,9 +10,12 @@
 namespace Rafrsr\LibArray2Object;
 
 use Rafrsr\LibArray2Object\Reader\PropertyReaderInterface;
+use Rafrsr\LibArray2Object\Traits\NamingStrategyAwareTrait;
 
 class Object2ArrayContext extends AbstractContext
 {
+    use NamingStrategyAwareTrait;
+
     /**
      * @var PropertyReaderInterface
      */

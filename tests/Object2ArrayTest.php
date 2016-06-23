@@ -9,6 +9,7 @@
 
 namespace Rafrsr\LibArray2Object\Tests;
 
+use Rafrsr\LibArray2Object\Naming\UnderscoreNamingStrategy;
 use Rafrsr\LibArray2Object\Object2ArrayBuilder;
 use Rafrsr\LibArray2Object\Parser\CallableParser;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Manager;
@@ -52,5 +53,18 @@ class Object2ArrayTest extends \PHPUnit_Framework_TestCase
         static::assertEquals($manager->getName(), $array['manager']['name']);
         static::assertEquals('$10000', $array['manager']['salary']);
         static::assertEquals('Player 1', $array['players'][0]['name']);
+    }
+
+    public function testCreateArrayWithUnderScoreNamingStrategy()
+    {
+        $team = new Team('Dream Team');
+        $team->setCreatedAt(new \DateTime('2016-01-01'));
+
+        //register custom parser
+        $object2Array = Object2ArrayBuilder::create()->setNamingStrategy(new UnderscoreNamingStrategy())->build();
+
+        $array = $object2Array->createArray($team);
+        static::assertEquals($team->getName(), $array['name']);
+        static::assertEquals('2016-01-01 00:00:00', $array['created_at']);
     }
 }

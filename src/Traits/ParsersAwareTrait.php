@@ -7,8 +7,9 @@
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
 
-namespace Rafrsr\LibArray2Object;
+namespace Rafrsr\LibArray2Object\Traits;
 
+use Rafrsr\LibArray2Object\Parser;
 use Rafrsr\LibArray2Object\Parser\ValueParserInterface;
 
 Trait ParsersAwareTrait
@@ -17,7 +18,6 @@ Trait ParsersAwareTrait
      * @var array|ValueParserInterface[]
      */
     private $parsers = [];
-
 
     /**
      * @return array|Parser\ValueParserInterface[]

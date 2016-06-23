@@ -10,6 +10,7 @@
 namespace Rafrsr\LibArray2Object;
 
 use Rafrsr\LibArray2Object\Matcher\CamelizeMatcher;
+use Rafrsr\LibArray2Object\Traits\MatcherAwareTrait;
 use Rafrsr\LibArray2Object\Writer\AccessorWriter;
 use Rafrsr\LibArray2Object\Writer\PropertyWriterInterface;
 

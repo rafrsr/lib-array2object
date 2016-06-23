@@ -9,11 +9,15 @@
 
 namespace Rafrsr\LibArray2Object;
 
+use Rafrsr\LibArray2Object\Naming\CamelCaseNamingStrategy;
 use Rafrsr\LibArray2Object\Reader\AccessorReader;
 use Rafrsr\LibArray2Object\Reader\PropertyReaderInterface;
+use Rafrsr\LibArray2Object\Traits\NamingStrategyAwareTrait;
 
 class Object2ArrayBuilder extends AbstractBuilder
 {
+    use NamingStrategyAwareTrait;
+
     /**
      * @var PropertyReaderInterface
      */
@@ -64,6 +68,7 @@ class Object2ArrayBuilder extends AbstractBuilder
 
         if ($context instanceof Object2ArrayContext) {
             $context->setReader($this->getReader() ?: new AccessorReader());
+            $context->setNamingStrategy($this->getNamingStrategy() ?:new CamelCaseNamingStrategy());
         }
     }
 }
