@@ -16,11 +16,13 @@ use Rafrsr\LibArray2Object\Naming\UnderscoreNamingStrategy;
 use Rafrsr\LibArray2Object\Reader\AccessorReader;
 use Rafrsr\LibArray2Object\Reader\PropertyReaderInterface;
 use Rafrsr\LibArray2Object\Reader\ReflectionReader;
+use Rafrsr\LibArray2Object\Traits\IgnoreNullsTrait;
 use Rafrsr\LibArray2Object\Traits\NamingStrategyAwareTrait;
 
 class Object2ArrayBuilder extends AbstractBuilder
 {
     use NamingStrategyAwareTrait;
+    use IgnoreNullsTrait;
 
     /**
      * @var PropertyReaderInterface
@@ -147,6 +149,7 @@ class Object2ArrayBuilder extends AbstractBuilder
         parent::prepareContext($context);
 
         if ($context instanceof Object2ArrayContext) {
+            $context->setIgnoreNulls($this->isIgnoreNulls());
             $context->setReader($this->getReader() ?: new AccessorReader());
             $context->setNamingStrategy($this->getNamingStrategy() ?: new CamelCaseNamingStrategy());
         }

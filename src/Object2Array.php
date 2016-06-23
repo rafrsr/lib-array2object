@@ -71,6 +71,11 @@ class Object2Array
                     $value = $this->context->getReader()->getValue($object, $property->getName());
                     $types = $types = Utils::getPropertyTypes($property);
                     $value = $this->parseValue($value, $types, $property, $object);
+
+                    if ($value === null && $this->context->isIgnoreNulls()) {
+                        continue;
+                    }
+
                     $transformedName = $this->context->getNamingStrategy()->transformName($property->getName());
                     $array[$transformedName] = $value;
                 }

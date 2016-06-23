@@ -67,4 +67,20 @@ class Object2ArrayTest extends \PHPUnit_Framework_TestCase
         static::assertEquals($team->getName(), $array['name']);
         static::assertEquals('2016-01-01 00:00:00', $array['created_at']);
     }
+
+    public function testCreateArrayWithNulls()
+    {
+        $team = new Team('Dream Team');
+
+        //register custom parser
+        $object2Array = Object2ArrayBuilder::create()
+            ->setIgnoreNulls(false)
+            ->build();
+
+        $array = $object2Array->createArray($team);
+
+        static::assertEquals($team->getName(), $array['name']);
+        static::assertNull($array['id']);
+        static::assertNull($array['manager']);
+    }
 }
