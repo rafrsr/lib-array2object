@@ -128,10 +128,10 @@ class Array2Object
                         }
 
                         foreach ($value as $key => &$arrayValue) {
-                            $arrayValue = $parser->toObjectValue($arrayValue, $type, $property, $object);
+                            $arrayValue = $parser->toObjectValue($arrayValue, str_replace('[]', null, $type), $property, $object);
                         }
                     } else {
-                        $value = $parser->toObjectValue($value, $type, $property, $object);
+                        $value = $parser->toObjectValue($value, str_replace('[]', null, $type), $property, $object);
                     }
                 } else {
                     throw new \InvalidArgumentException(sprintf("%s is not a valid parser.", get_class($parser)));
