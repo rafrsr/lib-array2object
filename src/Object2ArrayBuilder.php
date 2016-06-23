@@ -9,9 +9,13 @@
 
 namespace Rafrsr\LibArray2Object;
 
+use Rafrsr\LibArray2Object\Naming\CallableNamingStrategy;
 use Rafrsr\LibArray2Object\Naming\CamelCaseNamingStrategy;
+use Rafrsr\LibArray2Object\Naming\IdenticalNamingStrategy;
+use Rafrsr\LibArray2Object\Naming\UnderscoreNamingStrategy;
 use Rafrsr\LibArray2Object\Reader\AccessorReader;
 use Rafrsr\LibArray2Object\Reader\PropertyReaderInterface;
+use Rafrsr\LibArray2Object\Reader\ReflectionReader;
 use Rafrsr\LibArray2Object\Traits\NamingStrategyAwareTrait;
 
 class Object2ArrayBuilder extends AbstractBuilder
@@ -44,6 +48,82 @@ class Object2ArrayBuilder extends AbstractBuilder
     }
 
     /**
+     * Name array keys as "PropertyName"
+     *
+     * @return $this
+     */
+    public function useUcFirstCamelCaseNamingStrategy()
+    {
+        $this->setNamingStrategy(new CamelCaseNamingStrategy(true));
+
+        return $this;
+    }
+
+    /**
+     * Name array keys as "propertyName"
+     *
+     * @return $this
+     */
+    public function useCamelCaseNamingStrategy()
+    {
+        $this->setNamingStrategy(new CamelCaseNamingStrategy());
+
+        return $this;
+    }
+
+    /**
+     * Name array keys as "property_name"
+     *
+     * @return $this
+     */
+    public function useUnderScoreNamingStrategy()
+    {
+        $this->setNamingStrategy(new UnderscoreNamingStrategy());
+
+        return $this;
+    }
+
+    /**
+     * The array keys is identical to property name
+     *
+     * @return $this
+     */
+    public function useIdenticalNamingStrategy()
+    {
+        $this->setNamingStrategy(new IdenticalNamingStrategy());
+
+        return $this;
+    }
+
+    /**
+     * Use given callback to transform the array key
+     *
+     * @param callable $callback
+     *
+     * @return $this
+     */
+    public function useCallbackNamingStrategy(callable  $callback)
+    {
+        $this->setNamingStrategy(new CallableNamingStrategy($callback));
+
+        return $this;
+    }
+
+    /**
+     * Read the property directly without use getters
+     *
+     * @param boolean $onlyPublicProperties only public properties should be exported
+     *
+     * @return $this
+     */
+    public function disableGetters($onlyPublicProperties = false)
+    {
+        $this->setReader(new ReflectionReader($onlyPublicProperties));
+
+        return $this;
+    }
+
+    /**
      * Build custom Array2Object instance
      */
     public function build()
@@ -68,7 +148,7 @@ class Object2ArrayBuilder extends AbstractBuilder
 
         if ($context instanceof Object2ArrayContext) {
             $context->setReader($this->getReader() ?: new AccessorReader());
-            $context->setNamingStrategy($this->getNamingStrategy() ?:new CamelCaseNamingStrategy());
+            $context->setNamingStrategy($this->getNamingStrategy() ?: new CamelCaseNamingStrategy());
         }
     }
 }
