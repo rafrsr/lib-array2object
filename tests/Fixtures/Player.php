@@ -35,6 +35,18 @@ class Player
     protected $regular;
 
     /**
+     * Player constructor.
+     *
+     * @param string $name
+     * @param int    $number
+     */
+    public function __construct($name = null, $number = null)
+    {
+        $this->name = $name;
+        $this->number = $number;
+    }
+
+    /**
      * @return string
      */
     public function getName()

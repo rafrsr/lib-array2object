@@ -28,6 +28,41 @@ echo $array['name'];//David
 echo $array['number'];//1
 ````
 
+## Serialization
+
+This library can be used to serialize/deserialize objects without a complex configuration.
+
+#### Json
+````php
+//deserialize
+$json = '{"name":"David","number"=>"1"}';
+$object = Array2ObjectBuilder::create()->build()->createObject(Team::class, json_decode($json, true));
+echo $object->getName()//David
+
+//serialize
+$array = Object2ArrayBuilder::create()->build()->createArray($object);
+echo json_encode($array); // {"name":"David","number"=>"1"}
+````
+
+#### Xml
+
+Using the library [rafrsr/lib-array2xml](https://github.com/rafrsr/lib-array2xml) is very handy convert from/to xml
+
+````php
+//deserialize
+$xml = '<Player><name>Player 1</name><number>1</number></Player>';
+$object = Array2ObjectBuilder::create()->build()->create(Team::class, XML2Array::createArray($xml));
+echo $object->getName()//David
+
+//serialize
+$array = Object2ArrayBuilder::create()->build()->createArray($object);
+echo Array2XML::createXml('Player', $array); //  '<Player><name>Player 1</name><number>1</number></Player>'
+````
+
+> This library its handy to use and has some advanced configuration,
+> but in some cases (need groups, versions and other stuffs) is required use advanced libraries like 
+> [jms/serializer](https://github.com/schmittjoh/serializer)
+
 ## Documentation
 
 Full documentation are available on the [wiki page](https://github.com/rafrsr/lib-array2object/wiki)

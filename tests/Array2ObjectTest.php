@@ -148,7 +148,8 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
         static::assertFalse($team->getPlayers()[1]->isRegular());
     }
 
-    public function testArray2ObjectWithNestingChildrenOnlyOne(){
+    public function testArray2ObjectWithNestingChildrenOnlyOne()
+    {
         //with only one children
         //https://github.com/rafrsr/lib-array2object/issues/1#issuecomment-228155603
         $teamArray = [
@@ -198,5 +199,14 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
         /** @var Team $team */
         $team = $array2Object->createObject(Team::class, ['nombre' => 'Team']);
         static::assertEquals('Team', $team->getName());
+    }
+
+    public function testDeserializeJson()
+    {
+        $json = '{"name":"Big Team","players":[{"name":"Player 1"}]}';
+        /** @var Team $team */
+        $team = Array2ObjectBuilder::create()->build()->createObject(Team::class, json_decode($json, true));
+        static::assertEquals('Big Team', $team->getName());
+        static::assertEquals('Player 1', $team->getPlayers()[0]->getName());
     }
 }

@@ -83,4 +83,12 @@ class Object2ArrayTest extends \PHPUnit_Framework_TestCase
         static::assertNull($array['id']);
         static::assertNull($array['manager']);
     }
+
+    public function testSerializeJson()
+    {
+        $team = new Team('Dream Team');
+        $team->setPlayers([new Player('Player 1', 1)]);
+        $array = Object2ArrayBuilder::create()->build()->createArray($team);
+        static::assertEquals('{"name":"Dream Team","players":[{"name":"Player 1","number":1}]}', json_encode($array));
+    }
 }
