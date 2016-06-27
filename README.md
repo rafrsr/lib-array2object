@@ -17,6 +17,25 @@ Array to object conversion library. Convert a array to a object using simple and
 
 ## Usage
 
+Only need the class with common annotations
+
+````php
+<?php
+
+class Player
+{
+    /** @var string */
+    protected $name;
+
+   /** @var integer */
+    protected $number;
+
+   //setters and getters here
+}
+````
+
+To use:
+
 ````php
 $phpArray = ['name' => 'David', 'number' => '1'];
 $object = Array2ObjectBuilder::create()->build()->createObject(Player::class, $phpArray);
@@ -28,11 +47,11 @@ echo $array['name'];//David
 echo $array['number'];//1
 ````
 
-## Serialization
+#### Serialization
 
 This library can be used to serialize/deserialize objects without a complex configuration.
 
-#### Json
+##### Json
 ````php
 //deserialize
 $json = '{"name":"David","number"=>"1"}';
@@ -44,7 +63,7 @@ $array = Object2ArrayBuilder::create()->build()->createArray($object);
 echo json_encode($array); // {"name":"David","number"=>"1"}
 ````
 
-#### Xml
+##### Xml
 
 Using the library [rafrsr/lib-array2xml](https://github.com/rafrsr/lib-array2xml) is very handy convert from/to xml
 
