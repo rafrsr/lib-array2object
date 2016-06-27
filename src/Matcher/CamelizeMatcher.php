@@ -21,7 +21,7 @@ class CamelizeMatcher implements PropertyMatcherInterface
             || $propertyName === $this->camelize($givenName) //ErrorCode = error_code
             || $propertyName === lcfirst($this->camelize($givenName)) // errorCode => error_code
             || $propertyName === strtolower($this->camelize($givenName)) // errorcode => error_code
-            || strtolower($propertyName) === $givenName // errorCode => errorcode
+            || strtolower($propertyName) === strtolower($givenName) // errorCode => ErroRCODe
         ) {
             return true;
         }
