@@ -12,7 +12,7 @@ namespace Rafrsr\LibArray2Object\Tests;
 use Rafrsr\LibArray2Object\Naming\UnderscoreNamingStrategy;
 use Rafrsr\LibArray2Object\Object2ArrayBuilder;
 use Rafrsr\LibArray2Object\Parser\CallableParser;
-use Rafrsr\LibArray2Object\Tests\Fixtures\Manager;
+use Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace2\Manager;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Player;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 

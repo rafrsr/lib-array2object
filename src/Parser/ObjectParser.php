@@ -62,9 +62,16 @@ class ObjectParser implements ValueParserInterface
         //try to get the class from use statements in the class file
         if ($className === null) {
             $classContent = file_get_contents($context->getFileName());
-            preg_match("/use\s+([\w\\\]+$type);/", $classContent, $matches);
-            if (isset($matches[1]) && class_exists($matches[1])) {
-                $className = $matches[1];
+
+            $regExps = [
+                "/use\s+([\w\\\]+$type);/", //use NameSpace\ClassName;
+                "/use\s+([\w\\\]+)\s+as\s+$type/"//use NameSpace\ClassName as ClassAlias;
+            ];
+            foreach ($regExps as $regExp) {
+                if ($matchClass = $this->extractClass($regExp, $classContent)) {
+                    $className = $matchClass;
+                    break;
+                }
             }
         }
 
@@ -73,10 +80,8 @@ class ObjectParser implements ValueParserInterface
             $className = $context->getNamespaceName() . "\\" . $type;
         }
 
-        if (is_array($value) && $className !== null && class_exists($className)) {
-            if ($this->array2Object) {
-                return $this->array2Object->createObject($className, $value);
-            }
+        if (is_array($value) && $className !== null && class_exists($className) && $this->array2Object) {
+            return $this->array2Object->createObject($className, $value);
         }
 
         return $value;
@@ -92,5 +97,23 @@ class ObjectParser implements ValueParserInterface
         }
 
         return $value;
+    }
+
+    /**
+     * Extract class usage from origin class content using regular expresion
+     *
+     * @param $regEx
+     * @param $classContent
+     *
+     * @return null
+     */
+    private function extractClass($regEx, $classContent)
+    {
+        preg_match($regEx, $classContent, $matches);
+        if (isset($matches[1]) && class_exists($matches[1])) {
+            return $matches[1];
+        }
+
+        return null;
     }
 }

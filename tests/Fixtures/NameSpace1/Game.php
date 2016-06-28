@@ -7,12 +7,12 @@
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
 
-namespace Rafrsr\LibArray2Object\Tests\Fixtures;
+namespace Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace1;
 
-use Rafrsr\LibArray2Object\Array2Object;
 use Rafrsr\LibArray2Object\Array2ObjectBuilder;
 use Rafrsr\LibArray2Object\Array2ObjectInterface;
 use Rafrsr\LibArray2Object\Object2ArrayInterface;
+use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 
 class Game implements Array2ObjectInterface, Object2ArrayInterface
 {

@@ -10,7 +10,7 @@
 namespace Rafrsr\LibArray2Object\Tests;
 
 use Rafrsr\LibArray2Object\Object2ArrayBuilder;
-use Rafrsr\LibArray2Object\Tests\Fixtures\Game;
+use Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace1\Game;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 
 class Object2ArrayInterfaceTest extends \PHPUnit_Framework_TestCase

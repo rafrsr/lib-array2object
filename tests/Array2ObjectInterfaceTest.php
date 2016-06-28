@@ -10,7 +10,7 @@
 namespace Rafrsr\LibArray2Object\Tests;
 
 use Rafrsr\LibArray2Object\Array2ObjectBuilder;
-use Rafrsr\LibArray2Object\Tests\Fixtures\Game;
+use Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace1\Game;
 
 /**
  * Class Array2ObjectInterfaceTest

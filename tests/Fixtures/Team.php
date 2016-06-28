@@ -9,10 +9,12 @@
 
 namespace Rafrsr\LibArray2Object\Tests\Fixtures;
 
+use Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace2\Manager as Trainer;
+
 class Team extends AbstractTeam
 {
     /**
-     * @var Manager
+     * @var Trainer
      */
     protected $manager;
 
@@ -37,7 +39,7 @@ class Team extends AbstractTeam
     protected $scores;
 
     /**
-     * @return Manager
+     * @return Trainer
      */
     public function getManager()
     {
@@ -45,7 +47,7 @@ class Team extends AbstractTeam
     }
 
     /**
-     * @param Manager $manager
+     * @param Trainer $manager
      *
      * @return $this
      */
