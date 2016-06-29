@@ -10,6 +10,7 @@
 namespace Rafrsr\LibArray2Object\Tests\Fixtures;
 
 use Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace2\Manager as Trainer;
+use Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace2\Manager;
 
 class Team extends AbstractTeam
 {
@@ -37,6 +38,17 @@ class Team extends AbstractTeam
      * @var array|integer[]
      */
     protected $scores;
+
+    /**
+     * AbstractTeam constructor.
+     *
+     * @param string $name
+     */
+    public function __construct($name = null)
+    {
+        parent::__construct($name);
+        $this->manager = new Manager();
+    }
 
     /**
      * @return Trainer

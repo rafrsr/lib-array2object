@@ -54,11 +54,6 @@ class ObjectParser implements ValueParserInterface
         $className = null;
         $context = new \ReflectionClass($property->class);
 
-        //use the type as class
-        if (class_exists($type)) {
-            $className = $type;
-        }
-
         //try to get the class from use statements in the class file
         if ($className === null) {
             $classContent = file_get_contents($context->getFileName());
@@ -80,8 +75,22 @@ class ObjectParser implements ValueParserInterface
             $className = $context->getNamespaceName() . "\\" . $type;
         }
 
+        //use the type as class
+        if (class_exists($type)) {
+            $className = $type;
+        }
+
         if (is_array($value) && $className !== null && class_exists($className) && $this->array2Object) {
-            return $this->array2Object->createObject($className, $value);
+            $property->setAccessible(true);
+            $currentValue = $property->getValue($object);
+            if (is_object($currentValue)) {
+                $this->array2Object->populate($currentValue, $value);
+
+                return $currentValue;
+            } else {
+
+                return $this->array2Object->createObject($className, $value);
+            }
         }
 
         return $value;
