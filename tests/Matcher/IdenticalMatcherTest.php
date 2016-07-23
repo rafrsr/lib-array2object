@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Matcher;
 
 use Rafrsr\LibArray2Object\Matcher\IdenticalMatcher;
@@ -14,7 +13,7 @@ use Rafrsr\LibArray2Object\Matcher\IdenticalMatcher;
 class IdenticalMatcherTest extends PropertyMatcherTester
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function buildMatcher()
     {
@@ -22,22 +21,22 @@ class IdenticalMatcherTest extends PropertyMatcherTester
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getEquals()
     {
         return [
-            'test' => 'test'
+            'test' => 'test',
         ];
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getNotEquals()
     {
         return [
-            'test' => 'Test'
+            'test' => 'Test',
         ];
     }
 }

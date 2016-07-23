@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object;
 
 use Rafrsr\LibArray2Object\Traits\ParsersAwareTrait;

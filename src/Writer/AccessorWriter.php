@@ -6,18 +6,16 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Writer;
 
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyAccessorBuilder;
 
 /**
- * Class AccessorWriter
+ * Class AccessorWriter.
  */
 class AccessorWriter implements PropertyWriterInterface
 {
-
     /**
      * @var PropertyAccessor
      */
@@ -37,9 +35,8 @@ class AccessorWriter implements PropertyWriterInterface
         $this->accessor = $builder->getPropertyAccessor();
     }
 
-
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function isWritable($object, $propertyPath)
     {
@@ -47,7 +44,7 @@ class AccessorWriter implements PropertyWriterInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function setValue(&$object, $propertyPath, $value)
     {

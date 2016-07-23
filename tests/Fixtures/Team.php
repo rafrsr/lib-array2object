@@ -6,11 +6,10 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Fixtures;
 
-use Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace2\Manager as Trainer;
 use Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace2\Manager;
+use Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace2\Manager as Trainer;
 
 class Team extends AbstractTeam
 {
@@ -25,7 +24,7 @@ class Team extends AbstractTeam
     protected $createdAt;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $points;
 
@@ -35,7 +34,7 @@ class Team extends AbstractTeam
     protected $players;
 
     /**
-     * @var array|integer[]
+     * @var array|int[]
      */
     protected $scores;
 

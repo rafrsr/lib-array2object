@@ -6,14 +6,12 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object;
 
 use Rafrsr\LibArray2Object\Parser\ValueParserInterface;
 
 class Object2Array
 {
-
     /**
      * @var Object2ArrayContext
      */
@@ -94,7 +92,7 @@ class Object2Array
     }
 
     /**
-     * Parse a value using given types
+     * Parse a value using given types.
      *
      * @param mixed               $value
      * @param array               $types
@@ -113,11 +111,10 @@ class Object2Array
                             $arrayValue = $parser->toArrayValue($arrayValue, str_replace('[]', null, $type), $property, $arrayValue);
                         }
                     } else {
-                        //print_r($value);
                         $value = $parser->toArrayValue($value, $type, $property, $object);
                     }
                 } else {
-                    throw new \InvalidArgumentException(sprintf("%s is not a valid parser.", get_class($parser)));
+                    throw new \InvalidArgumentException(sprintf('%s is not a valid parser.', get_class($parser)));
                 }
             }
         }

@@ -6,15 +6,14 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Matcher;
 
 use Rafrsr\LibArray2Object\Matcher\CamelizeMatcher;
 
-class CamelizeMatcherTester extends PropertyMatcherTester
+class CamelizeMatcherTest extends PropertyMatcherTester
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function buildMatcher()
     {
@@ -22,7 +21,7 @@ class CamelizeMatcherTester extends PropertyMatcherTester
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getEquals()
     {
@@ -37,12 +36,12 @@ class CamelizeMatcherTester extends PropertyMatcherTester
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getNotEquals()
     {
         return [
-            'test' => 'testing'
+            'test' => 'testing',
         ];
     }
 }

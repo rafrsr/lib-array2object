@@ -6,13 +6,12 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Parser;
 
 use Rafrsr\LibArray2Object\Parser\ValueParserInterface;
 
 /**
- * Class ParserTester
+ * Class ParserTester.
  */
 abstract class ParserTester extends \PHPUnit_Framework_TestCase
 {

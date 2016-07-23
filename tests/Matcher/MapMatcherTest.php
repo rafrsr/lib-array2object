@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Matcher;
 
 use Rafrsr\LibArray2Object\Matcher\MapMatcher;
@@ -14,20 +13,20 @@ use Rafrsr\LibArray2Object\Matcher\MapMatcher;
 class MapMatcherTest extends PropertyMatcherTester
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function buildMatcher()
     {
         return new MapMatcher(
             [
                 'test' => 'prueba',
-                'name' => 'nombre'
+                'name' => 'nombre',
             ]
         );
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getEquals()
     {
@@ -38,12 +37,12 @@ class MapMatcherTest extends PropertyMatcherTester
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getNotEquals()
     {
         return [
-            'test' => 'name'
+            'test' => 'name',
         ];
     }
 }

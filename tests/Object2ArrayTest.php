@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests;
 
 use Rafrsr\LibArray2Object\Naming\UnderscoreNamingStrategy;
@@ -39,7 +38,7 @@ class Object2ArrayTest extends \PHPUnit_Framework_TestCase
             new CallableParser(
                 function ($value, $type, \ReflectionProperty $property, $object) {
                     if ($property->getName() === 'salary') {
-                        $value = '$' . $value;
+                        $value = '$'.$value;
                     }
 
                     return $value;

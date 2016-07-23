@@ -6,11 +6,10 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Matcher;
 
 /**
- * Class MapMatcher
+ * Class MapMatcher.
  */
 class MapMatcher implements PropertyMatcherInterface
 {
@@ -30,12 +29,12 @@ class MapMatcher implements PropertyMatcherInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function match(\ReflectionProperty $property, $givenName)
     {
         if (array_key_exists($property->getName(), $this->map)) {
-            return ($this->map[$property->getName()] === $givenName);
+            return $this->map[$property->getName()] === $givenName;
         }
 
         return false;

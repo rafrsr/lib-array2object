@@ -6,13 +6,12 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Matcher;
 
 class CamelizeMatcher implements PropertyMatcherInterface
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function match(\ReflectionProperty $property, $givenName)
     {

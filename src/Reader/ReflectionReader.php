@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Reader;
 
 class ReflectionReader implements PropertyReaderInterface
@@ -14,7 +13,7 @@ class ReflectionReader implements PropertyReaderInterface
     protected $onlyPublicProperties;
 
     /**
-     * @param boolean $onlyPublicProperties ignore private or protected properties
+     * @param bool $onlyPublicProperties ignore private or protected properties
      */
     public function __construct($onlyPublicProperties = false)
     {
@@ -22,7 +21,7 @@ class ReflectionReader implements PropertyReaderInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function isReadable($object, $propertyPath)
     {
@@ -41,7 +40,7 @@ class ReflectionReader implements PropertyReaderInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getValue($object, $propertyPath)
     {
@@ -54,6 +53,6 @@ class ReflectionReader implements PropertyReaderInterface
             return $property->getValue($object);
         }
 
-        return null;
+        return;
     }
 }

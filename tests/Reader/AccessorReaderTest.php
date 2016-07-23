@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Reader;
 
 use Rafrsr\LibArray2Object\Reader\AccessorReader;
@@ -14,7 +13,6 @@ use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 
 class AccessorReaderTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testIsReadable()
     {
         $reader = new AccessorReader();

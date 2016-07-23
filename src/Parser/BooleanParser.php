@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Parser;
 
 class BooleanParser implements ValueParserInterface
@@ -14,7 +13,7 @@ class BooleanParser implements ValueParserInterface
     const NAME = 'boolean';
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -22,7 +21,7 @@ class BooleanParser implements ValueParserInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
@@ -39,10 +38,10 @@ class BooleanParser implements ValueParserInterface
                         $value = false;
                         break;
                     default:
-                        $value = (boolean)$value;
+                        $value = (boolean) $value;
                 }
             } else {
-                $value = (boolean)$value;
+                $value = (boolean) $value;
             }
         }
 
@@ -50,7 +49,7 @@ class BooleanParser implements ValueParserInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
     {

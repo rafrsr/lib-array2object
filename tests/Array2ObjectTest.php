@@ -6,12 +6,11 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests;
 
 use Rafrsr\LibArray2Object\Array2ObjectBuilder;
-use Rafrsr\LibArray2Object\Parser\CallableParser;
 use Rafrsr\LibArray2Object\Matcher\MapMatcher;
+use Rafrsr\LibArray2Object\Parser\CallableParser;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 
 class Array2ObjectTest extends \PHPUnit_Framework_TestCase
@@ -19,11 +18,11 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
     public function testArray2Object()
     {
         $teamArray = [
-            'id' => 1,//read-only
+            'id' => 1, //read-only
             'name' => 'Dream Team',
             'Manager' => [
                 'name' => 'Big Manager',
-                'salary' => '$10000'
+                'salary' => '$10000',
             ],
             'createdAt' => '2016-01-01',
             'points' => '25',
@@ -32,26 +31,26 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
                     'name' => 'Player 1',
                     'number' => '1',
                     'height' => '1.80',
-                    'regular' => 'true'
+                    'regular' => 'true',
                 ],
                 [
                     'name' => 'Player 2',
                     'number' => '2',
                     'height' => '1.85',
-                    'regular' => 0
+                    'regular' => 0,
                 ],
                 [
                     'name' => 'Player 3',
                     'number' => '3',
                     'height' => '1.78',
-                    'regular' => 'yes'
-                ]
+                    'regular' => 'yes',
+                ],
             ],
             'scores' => [
                 '2016' => '29',
                 '2015' => '28',
                 '2014' => '30',
-            ]
+            ],
         ];
 
         //register custom parser
@@ -99,7 +98,7 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
         static::assertInternalType('integer', $team->getScores()[2016]);
 
         $teamArray = [
-            'name' => 'New Name'
+            'name' => 'New Name',
         ];
 
         $array2Object->populate($team, $teamArray);
@@ -119,16 +118,16 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
                         'name' => 'Player 1',
                         'number' => '1',
                         'height' => '1.80',
-                        'regular' => 'true'
+                        'regular' => 'true',
                     ],
                     [
                         'name' => 'Player 2',
                         'number' => '2',
                         'height' => '1.85',
-                        'regular' => 0
+                        'regular' => 0,
                     ],
-                ]
-            ]
+                ],
+            ],
         ];
 
         $array2Object = Array2ObjectBuilder::create()->build();
@@ -159,9 +158,9 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
                     'name' => 'Player 1',
                     'number' => '1',
                     'height' => '1.80',
-                    'regular' => 'true'
+                    'regular' => 'true',
                 ],
-            ]
+            ],
         ];
 
         $array2Object = Array2ObjectBuilder::create()->build();
@@ -192,7 +191,7 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
         $array2Object = Array2ObjectBuilder::create()->setMatcher(
             new MapMatcher(
                 [
-                    'name' => 'nombre'
+                    'name' => 'nombre',
                 ]
             )
         )->build();

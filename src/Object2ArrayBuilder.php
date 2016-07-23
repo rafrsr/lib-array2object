@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object;
 
 use Rafrsr\LibArray2Object\Naming\CallableNamingStrategy;
@@ -50,7 +49,7 @@ class Object2ArrayBuilder extends AbstractBuilder
     }
 
     /**
-     * Name array keys as "PropertyName"
+     * Name array keys as "PropertyName".
      *
      * @return $this
      */
@@ -62,7 +61,7 @@ class Object2ArrayBuilder extends AbstractBuilder
     }
 
     /**
-     * Name array keys as "propertyName"
+     * Name array keys as "propertyName".
      *
      * @return $this
      */
@@ -74,7 +73,7 @@ class Object2ArrayBuilder extends AbstractBuilder
     }
 
     /**
-     * Name array keys as "property_name"
+     * Name array keys as "property_name".
      *
      * @return $this
      */
@@ -86,7 +85,7 @@ class Object2ArrayBuilder extends AbstractBuilder
     }
 
     /**
-     * The array keys is identical to property name
+     * The array keys is identical to property name.
      *
      * @return $this
      */
@@ -98,7 +97,7 @@ class Object2ArrayBuilder extends AbstractBuilder
     }
 
     /**
-     * Use given callback to transform the array key
+     * Use given callback to transform the array key.
      *
      * @param callable $callback
      *
@@ -112,9 +111,9 @@ class Object2ArrayBuilder extends AbstractBuilder
     }
 
     /**
-     * Read the property directly without use getters
+     * Read the property directly without use getters.
      *
-     * @param boolean $onlyPublicProperties only public properties should be exported
+     * @param bool $onlyPublicProperties only public properties should be exported
      *
      * @return $this
      */
@@ -126,7 +125,7 @@ class Object2ArrayBuilder extends AbstractBuilder
     }
 
     /**
-     * Build custom Array2Object instance
+     * Build custom Array2Object instance.
      */
     public function build()
     {
@@ -142,7 +141,7 @@ class Object2ArrayBuilder extends AbstractBuilder
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function prepareContext(AbstractContext $context)
     {

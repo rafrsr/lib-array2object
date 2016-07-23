@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Parser;
 
 class FloatParser implements ValueParserInterface
@@ -14,7 +13,7 @@ class FloatParser implements ValueParserInterface
     const NAME = 'float';
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -22,19 +21,19 @@ class FloatParser implements ValueParserInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
         if ($type === 'float' || $type === 'double') {
-            return (float)$value;
+            return (float) $value;
         }
 
         return $value;
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
     {

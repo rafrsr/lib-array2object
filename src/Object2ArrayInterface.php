@@ -6,13 +6,12 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object;
 
 interface Object2ArrayInterface
 {
     /**
-     * Create array from current object,
+     * Create array from current object,.
      *
      * @return array
      */

@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Reader;
 
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -34,7 +33,7 @@ class AccessorReader implements PropertyReaderInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function isReadable($object, $propertyPath)
     {
@@ -42,7 +41,7 @@ class AccessorReader implements PropertyReaderInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getValue($object, $propertyPath)
     {

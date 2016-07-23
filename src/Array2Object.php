@@ -6,14 +6,13 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object;
 
 use Rafrsr\LibArray2Object\Parser\ValueParserInterface;
 
 /**
  * Using the property names and the common property annotations
- * populate a object instance with the values of the array recursively
+ * populate a object instance with the values of the array recursively.
  */
 class Array2Object
 {
@@ -51,19 +50,19 @@ class Array2Object
     }
 
     /**
-     * createObject
+     * createObject.
      *
      * @param string $class class to create object or instance
      * @param array  $data  array of data
      *
-     * @return mixed
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return mixed
      */
     public function createObject($class, array $data)
     {
         if (is_string($class) && class_exists($class)) {
-            $object = new $class;
+            $object = new $class();
         } else {
             throw new \InvalidArgumentException('The first argument should be a valid class, can use ::populate with objects');
         }
@@ -104,7 +103,7 @@ class Array2Object
     }
 
     /**
-     * Parse a value using given types
+     * Parse a value using given types.
      *
      * @param mixed               $value
      * @param array               $types
@@ -116,7 +115,6 @@ class Array2Object
     private function parseValue($value, $types, \ReflectionProperty $property, $object)
     {
         foreach ($types as $type) {
-
             foreach ($this->context->getParsers() as $parser) {
                 if ($parser instanceof ValueParserInterface) {
                     if (is_array($value) && strpos($type, '[]') !== false) {
@@ -140,12 +138,11 @@ class Array2Object
                             }
                         }
                         $value = $tmpArray;
-
                     } else {
                         $value = $parser->toObjectValue($value, str_replace('[]', null, $type), $property, $object);
                     }
                 } else {
-                    throw new \InvalidArgumentException(sprintf("%s is not a valid parser.", get_class($parser)));
+                    throw new \InvalidArgumentException(sprintf('%s is not a valid parser.', get_class($parser)));
                 }
             }
         }

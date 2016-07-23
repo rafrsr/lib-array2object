@@ -6,13 +6,12 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Naming;
 
 use Doctrine\Common\Util\Inflector;
 
 /**
- * Transform property name from "property_name" -> "propertyName"
+ * Transform property name from "property_name" -> "propertyName".
  */
 class CamelCaseNamingStrategy implements NamingStrategyInterface
 {
@@ -24,7 +23,7 @@ class CamelCaseNamingStrategy implements NamingStrategyInterface
     /**
      * CamelCaseNamingStrategy constructor.
      *
-     * @param boolean $ucFirst
+     * @param bool $ucFirst
      */
     public function __construct($ucFirst = false)
     {
@@ -32,7 +31,7 @@ class CamelCaseNamingStrategy implements NamingStrategyInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function transformName($name)
     {

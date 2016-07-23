@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Matcher;
 
 class CallableMatcher implements PropertyMatcherInterface
@@ -27,7 +26,7 @@ class CallableMatcher implements PropertyMatcherInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function match(\ReflectionProperty $property, $givenName)
     {

@@ -6,16 +6,15 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Fixtures;
 
 /**
- * Class AbstractTeam
+ * Class AbstractTeam.
  */
 abstract class AbstractTeam
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -63,10 +62,10 @@ abstract class AbstractTeam
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function __toString()
     {
-        return (string)$this->getName();
+        return (string) $this->getName();
     }
 }

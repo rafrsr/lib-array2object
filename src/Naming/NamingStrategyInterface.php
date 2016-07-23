@@ -6,13 +6,12 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Naming;
 
 interface NamingStrategyInterface
 {
     /**
-     * Transform the origin name to use different version on target
+     * Transform the origin name to use different version on target.
      *
      * @param string $name current name
      *

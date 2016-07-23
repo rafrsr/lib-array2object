@@ -6,17 +6,15 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Matcher;
 
 use Rafrsr\LibArray2Object\Matcher\PropertyMatcherInterface;
 
 /**
- * Class PropertyMatcherTester
+ * Class PropertyMatcherTester.
  */
 abstract class PropertyMatcherTester extends \PHPUnit_Framework_TestCase
 {
-
     public function testMatch()
     {
         $matcher = $this->buildMatcher();
@@ -37,21 +35,21 @@ abstract class PropertyMatcherTester extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * buildMatcher
+     * buildMatcher.
      *
      * @return PropertyMatcherInterface
      */
     abstract public function buildMatcher();
 
     /**
-     * getEquals
+     * getEquals.
      *
      * @return array
      */
     abstract public function getEquals();
 
     /**
-     * getNotEquals
+     * getNotEquals.
      *
      * @return array
      */

@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object;
 
 use Rafrsr\LibArray2Object\Parser\ArrayParser;
@@ -34,13 +33,13 @@ abstract class AbstractBuilder
     private $disabledParsers = [];
 
     /**
-     * create builder instance
+     * create builder instance.
      *
      * @return static
      */
     public static function create()
     {
-        return new static;
+        return new static();
     }
 
     /**
@@ -78,7 +77,7 @@ abstract class AbstractBuilder
     /**
      * @param string|ValueParserInterface $parser
      *
-     * @return boolean
+     * @return bool
      */
     public function hasParser($parser)
     {
@@ -90,7 +89,7 @@ abstract class AbstractBuilder
     }
 
     /**
-     * disableParser
+     * disableParser.
      *
      * @param string|ValueParserInterface $parser
      *
@@ -149,7 +148,7 @@ abstract class AbstractBuilder
                 new FloatParser(),
                 new DateTimeParser(),
                 new ArrayParser(),
-                new ObjectParser($context)
+                new ObjectParser($context),
             ]
         );
 

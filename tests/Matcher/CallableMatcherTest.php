@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Matcher;
 
 use Rafrsr\LibArray2Object\Matcher\CallableMatcher;
@@ -14,34 +13,34 @@ use Rafrsr\LibArray2Object\Matcher\CallableMatcher;
 class CallableMatcherTest extends PropertyMatcherTester
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function buildMatcher()
     {
         return new CallableMatcher(
             function (\ReflectionProperty $property, $givenName) {
-                return ($givenName === 'prueba' && $property->getName() === 'test');
+                return $givenName === 'prueba' && $property->getName() === 'test';
             }
         );
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getEquals()
     {
         return [
-            'test' => 'prueba'
+            'test' => 'prueba',
         ];
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getNotEquals()
     {
         return [
-            'test' => 'name'
+            'test' => 'name',
         ];
     }
 }

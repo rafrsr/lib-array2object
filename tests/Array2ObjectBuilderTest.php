@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests;
 
 use Rafrsr\LibArray2Object\Array2ObjectBuilder;
@@ -21,7 +20,6 @@ use Rafrsr\LibArray2Object\Writer\ReflectionWriter;
 
 class Array2ObjectBuilderTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testCreate()
     {
         static::assertInstanceOf(Array2ObjectBuilder::class, Array2ObjectBuilder::create());

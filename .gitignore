@@ -1,11 +1,6 @@
-### JetBrains
-## Directory-based project format:
-.idea/
-.project/
-
 ### Composer
 vendor/
-bin/
 
 ### Others
 /phpunit.xml
+.php_cs.cache

@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Naming;
 
 class CallableNamingStrategy implements NamingStrategyInterface
@@ -27,7 +26,7 @@ class CallableNamingStrategy implements NamingStrategyInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function transformName($name)
     {

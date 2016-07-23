@@ -6,11 +6,10 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Fixtures;
 
 /**
- * Class Player
+ * Class Player.
  */
 class Player
 {
@@ -20,7 +19,7 @@ class Player
     protected $name;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $number;
 
@@ -30,7 +29,7 @@ class Player
     protected $height;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $regular;
 
@@ -107,7 +106,7 @@ class Player
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isRegular()
     {
@@ -115,7 +114,7 @@ class Player
     }
 
     /**
-     * @param boolean $regular
+     * @param bool $regular
      *
      * @return $this
      */

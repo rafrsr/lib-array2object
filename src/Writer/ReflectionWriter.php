@@ -6,19 +6,17 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Writer;
 
 /**
- * Class ReflectionWriter
+ * Class ReflectionWriter.
  */
 class ReflectionWriter implements PropertyWriterInterface
 {
-
     protected $onlyPublicProperties;
 
     /**
-     * @param boolean $onlyPublicProperties ignore private or protected properties
+     * @param bool $onlyPublicProperties ignore private or protected properties
      */
     public function __construct($onlyPublicProperties = false)
     {
@@ -26,7 +24,7 @@ class ReflectionWriter implements PropertyWriterInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function isWritable($object, $propertyPath)
     {
@@ -45,7 +43,7 @@ class ReflectionWriter implements PropertyWriterInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function setValue(&$object, $propertyPath, $value)
     {

@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace1;
 
 use Rafrsr\LibArray2Object\Array2ObjectBuilder;
@@ -16,7 +15,6 @@ use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 
 class Game implements Array2ObjectInterface, Object2ArrayInterface
 {
-
     protected $stadiumName;
 
     protected $date;
@@ -106,7 +104,7 @@ class Game implements Array2ObjectInterface, Object2ArrayInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function __populate(array $data)
     {
@@ -119,7 +117,7 @@ class Game implements Array2ObjectInterface, Object2ArrayInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function __toArray()
     {

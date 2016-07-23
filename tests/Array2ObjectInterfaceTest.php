@@ -6,14 +6,13 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests;
 
 use Rafrsr\LibArray2Object\Array2ObjectBuilder;
 use Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace1\Game;
 
 /**
- * Class Array2ObjectInterfaceTest
+ * Class Array2ObjectInterfaceTest.
  */
 class Array2ObjectInterfaceTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,11 +22,11 @@ class Array2ObjectInterfaceTest extends \PHPUnit_Framework_TestCase
             'stadium' => 'National',
             'date' => '2016-01-01',
             'homeClub' => [
-                'name' => 'Team 1'
+                'name' => 'Team 1',
             ],
             'visitor' => [
-                'name' => 'Team 2'
-            ]
+                'name' => 'Team 2',
+            ],
         ];
 
         $array2Object = Array2ObjectBuilder::create()->build();

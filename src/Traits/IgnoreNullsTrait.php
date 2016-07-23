@@ -6,21 +6,20 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Traits;
 
 /**
- * IgnoreNullsTrait
+ * IgnoreNullsTrait.
  */
 trait IgnoreNullsTrait
 {
     /**
-     * @var boolean
+     * @var bool
      */
     private $ignoreNulls = true;
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIgnoreNulls()
     {
@@ -28,7 +27,7 @@ trait IgnoreNullsTrait
     }
 
     /**
-     * @param boolean $ignoreNulls
+     * @param bool $ignoreNulls
      *
      * @return $this
      */

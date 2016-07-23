@@ -6,16 +6,15 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object;
 
 /**
- * Class Utils
+ * Class Utils.
  */
 class Utils
 {
     /**
-     * Get array of class properties including parents private properties
+     * Get array of class properties including parents private properties.
      *
      * @param \ReflectionClass $refClass
      *

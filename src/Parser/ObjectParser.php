@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Parser;
 
 use Rafrsr\LibArray2Object\AbstractContext;
@@ -39,7 +38,7 @@ class ObjectParser implements ValueParserInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -47,7 +46,7 @@ class ObjectParser implements ValueParserInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
@@ -60,7 +59,7 @@ class ObjectParser implements ValueParserInterface
 
             $regExps = [
                 "/use\s+([\w\\\]+$type);/", //use NameSpace\ClassName;
-                "/use\s+([\w\\\]+)\s+as\s+$type/"//use NameSpace\ClassName as ClassAlias;
+                "/use\s+([\w\\\]+)\s+as\s+$type/", //use NameSpace\ClassName as ClassAlias;
             ];
             foreach ($regExps as $regExp) {
                 if ($matchClass = $this->extractClass($regExp, $classContent)) {
@@ -71,8 +70,8 @@ class ObjectParser implements ValueParserInterface
         }
 
         //use the same namespace as class container
-        if ($className === null && class_exists($context->getNamespaceName() . "\\" . $type)) {
-            $className = $context->getNamespaceName() . "\\" . $type;
+        if ($className === null && class_exists($context->getNamespaceName().'\\'.$type)) {
+            $className = $context->getNamespaceName().'\\'.$type;
         }
 
         //use the type as class
@@ -88,7 +87,6 @@ class ObjectParser implements ValueParserInterface
 
                 return $currentValue;
             } else {
-
                 return $this->array2Object->createObject($className, $value);
             }
         }
@@ -97,7 +95,7 @@ class ObjectParser implements ValueParserInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
     {
@@ -109,12 +107,10 @@ class ObjectParser implements ValueParserInterface
     }
 
     /**
-     * Extract class usage from origin class content using regular expresion
+     * Extract class usage from origin class content using regular expresion.
      *
      * @param $regEx
      * @param $classContent
-     *
-     * @return null
      */
     private function extractClass($regEx, $classContent)
     {
@@ -123,6 +119,6 @@ class ObjectParser implements ValueParserInterface
             return $matches[1];
         }
 
-        return null;
+        return;
     }
 }

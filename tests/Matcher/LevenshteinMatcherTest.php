@@ -6,16 +6,14 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Matcher;
 
 use Rafrsr\LibArray2Object\Matcher\LevenshteinMatcher;
 
 class LevenshteinMatcherTest extends PropertyMatcherTester
 {
-
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function buildMatcher()
     {
@@ -23,7 +21,7 @@ class LevenshteinMatcherTest extends PropertyMatcherTester
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getEquals()
     {
@@ -31,12 +29,12 @@ class LevenshteinMatcherTest extends PropertyMatcherTester
             'test' => 'Test',
             'test_property' => 'TestProperty',
             'test_properti' => 'TestProperty',
-            'testing' => 'test_ng'
+            'testing' => 'test_ng',
         ];
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getNotEquals()
     {

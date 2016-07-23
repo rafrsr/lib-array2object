@@ -6,24 +6,23 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Parser;
 
 /**
- * ValueParserInterface
+ * ValueParserInterface.
  */
 interface ValueParserInterface
 {
     /**
-     * get parse name
+     * get parse name.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * @param  mixed              $value    current value
-     * @param  string             $type     property annotation type
+     * @param mixed               $value    current value
+     * @param string              $type     property annotation type
      * @param \ReflectionProperty $property current property
      * @param object              $object   object instance to use as context is needed
      *
@@ -32,8 +31,8 @@ interface ValueParserInterface
     public function toObjectValue($value, $type, \ReflectionProperty $property, $object);
 
     /**
-     * @param  mixed              $value    current value
-     * @param  string             $type     property annotation type
+     * @param mixed               $value    current value
+     * @param string              $type     property annotation type
      * @param \ReflectionProperty $property current property
      * @param object              $object   object instance to use as context is needed
      *

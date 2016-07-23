@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object;
 
 use Rafrsr\LibArray2Object\Matcher\CallableMatcher;
@@ -20,7 +19,7 @@ use Rafrsr\LibArray2Object\Writer\PropertyWriterInterface;
 use Rafrsr\LibArray2Object\Writer\ReflectionWriter;
 
 /**
- * Class Array2ObjectBuilder
+ * Class Array2ObjectBuilder.
  */
 class Array2ObjectBuilder extends AbstractBuilder
 {
@@ -52,7 +51,7 @@ class Array2ObjectBuilder extends AbstractBuilder
     }
 
     /**
-     * Array keys and property names are identical
+     * Array keys and property names are identical.
      *
      * @return $this
      */
@@ -65,7 +64,7 @@ class Array2ObjectBuilder extends AbstractBuilder
 
     /**
      * Array keys and property names are compared using some property possible versions
-     * e.g, propertyName => property_name
+     * e.g, propertyName => property_name.
      *
      * @return $this
      */
@@ -77,7 +76,7 @@ class Array2ObjectBuilder extends AbstractBuilder
     }
 
     /**
-     * Array keys and property names are compared using levenshtein algorithm to find similar strings
+     * Array keys and property names are compared using levenshtein algorithm to find similar strings.
      *
      * @return $this
      */
@@ -89,7 +88,7 @@ class Array2ObjectBuilder extends AbstractBuilder
     }
 
     /**
-     * Array keys and property names are compared using the given property and array key map
+     * Array keys and property names are compared using the given property and array key map.
      *
      * @param array $map
      *
@@ -104,7 +103,7 @@ class Array2ObjectBuilder extends AbstractBuilder
 
     /**
      * Array keys and property names are compared using custom function
-     * the given function receive two parameters \ReflectionProperty $property, $givenName
+     * the given function receive two parameters \ReflectionProperty $property, $givenName.
      *
      * @param callable $callback
      *
@@ -118,9 +117,9 @@ class Array2ObjectBuilder extends AbstractBuilder
     }
 
     /**
-     * Write the property directly without use setters
+     * Write the property directly without use setters.
      *
-     * @param boolean $onlyPublicProperties only public properties should be exported
+     * @param bool $onlyPublicProperties only public properties should be exported
      *
      * @return $this
      */
@@ -132,7 +131,7 @@ class Array2ObjectBuilder extends AbstractBuilder
     }
 
     /**
-     * Build custom Array2Object instance
+     * Build custom Array2Object instance.
      */
     public function build()
     {
@@ -148,7 +147,7 @@ class Array2ObjectBuilder extends AbstractBuilder
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function prepareContext(AbstractContext $context)
     {

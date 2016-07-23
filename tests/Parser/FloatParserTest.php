@@ -6,11 +6,9 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Parser;
 
 use Rafrsr\LibArray2Object\Parser\FloatParser;
-use Rafrsr\LibArray2Object\Parser\IntegerParser;
 
 class FloatParserTest extends ParserTester
 {
@@ -29,7 +27,7 @@ class FloatParserTest extends ParserTester
         return [
             '1' => 1,
             '12 apples' => 12,
-            '12.2' => 12.2
+            '12.2' => 12.2,
         ];
     }
 }

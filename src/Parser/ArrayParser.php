@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Parser;
 
 class ArrayParser implements ValueParserInterface
@@ -14,7 +13,7 @@ class ArrayParser implements ValueParserInterface
     const NAME = 'array';
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -22,7 +21,7 @@ class ArrayParser implements ValueParserInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
@@ -36,7 +35,7 @@ class ArrayParser implements ValueParserInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
     {

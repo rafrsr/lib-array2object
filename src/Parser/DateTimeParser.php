@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Parser;
 
 class DateTimeParser implements ValueParserInterface
@@ -14,7 +13,7 @@ class DateTimeParser implements ValueParserInterface
     const NAME = 'datetime';
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -22,7 +21,7 @@ class DateTimeParser implements ValueParserInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
@@ -34,7 +33,7 @@ class DateTimeParser implements ValueParserInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
     {

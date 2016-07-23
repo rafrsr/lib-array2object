@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Naming;
 
 use Rafrsr\LibArray2Object\Naming\CallableNamingStrategy;

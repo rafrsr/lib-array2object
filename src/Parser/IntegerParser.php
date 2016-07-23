@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Parser;
 
 class IntegerParser implements ValueParserInterface
@@ -14,7 +13,7 @@ class IntegerParser implements ValueParserInterface
     const NAME = 'integer';
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -22,19 +21,19 @@ class IntegerParser implements ValueParserInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
         if ($type === 'integer' || $type === 'int') {
-            return (integer)$value;
+            return (integer) $value;
         }
 
         return $value;
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArrayValue($value, $type, \ReflectionProperty $property, $object)
     {

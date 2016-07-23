@@ -6,18 +6,17 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Naming;
 
 use Doctrine\Common\Inflector\Inflector;
 
 /**
- * Transform property name from "propertyName" -> "property_name"
+ * Transform property name from "propertyName" -> "property_name".
  */
 class UnderscoreNamingStrategy implements NamingStrategyInterface
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function transformName($name)
     {

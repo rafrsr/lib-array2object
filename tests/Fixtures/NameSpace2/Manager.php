@@ -6,11 +6,10 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace2;
 
 /**
- * Class Manager
+ * Class Manager.
  */
 class Manager
 {

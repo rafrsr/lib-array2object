@@ -6,13 +6,12 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Traits;
 
 use Rafrsr\LibArray2Object\Parser;
 use Rafrsr\LibArray2Object\Parser\ValueParserInterface;
 
-Trait ParsersAwareTrait
+trait ParsersAwareTrait
 {
     /**
      * @var array|ValueParserInterface[]
@@ -45,7 +44,7 @@ Trait ParsersAwareTrait
     }
 
     /**
-     * Append parser to the list of parsers, LOW priority
+     * Append parser to the list of parsers, LOW priority.
      *
      * @param ValueParserInterface $parser
      *
@@ -59,7 +58,7 @@ Trait ParsersAwareTrait
     }
 
     /**
-     * Prepend parser to list of parsers, HIGH priority
+     * Prepend parser to list of parsers, HIGH priority.
      *
      * @param ValueParserInterface $parser
      *

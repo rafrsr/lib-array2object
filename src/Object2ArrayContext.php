@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object;
 
 use Rafrsr\LibArray2Object\Reader\PropertyReaderInterface;
@@ -41,5 +40,5 @@ class Object2ArrayContext extends AbstractContext
         $this->reader = $reader;
 
         return $this;
-    }    
+    }
 }

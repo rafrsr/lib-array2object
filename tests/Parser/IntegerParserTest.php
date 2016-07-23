@@ -6,7 +6,6 @@
  *
  * @copyright 2016 Copyright(c) - All rights reserved.
  */
-
 namespace Rafrsr\LibArray2Object\Tests\Parser;
 
 use Rafrsr\LibArray2Object\Parser\IntegerParser;
@@ -28,7 +27,7 @@ class IntegerParserTest extends ParserTester
         return [
             '1' => 1,
             '12 apples' => 12,
-            '12.2' => 12
+            '12.2' => 12,
         ];
     }
 }
