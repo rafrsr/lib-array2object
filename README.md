@@ -8,6 +8,8 @@
 [![Total Downloads](https://poser.pugx.org/rafrsr/lib-array2object/downloads)](https://packagist.org/packages/rafrsr/lib-array2object)
 [![License](https://poser.pugx.org/rafrsr/lib-array2object/license)](https://packagist.org/packages/rafrsr/lib-array2object)
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/b5e6f18e-524f-4d65-9f47-84417712b264/big.png)](https://insight.sensiolabs.com/projects/b5e6f18e-524f-4d65-9f47-84417712b264)
+
 Array to object conversion library. Convert a array to a object using simple and common property annotations
 
 ## Installation
