@@ -1,10 +1,12 @@
 <?php
 
-/**
- * LICENSE: This file is subject to the terms and conditions defined in
- * file 'LICENSE', which is part of this source code package.
+/*
+ * This file is part of the rafrsr/lib-array2object package.
  *
- * @copyright 2016 Copyright(c) - All rights reserved.
+ * (c) Rafael SR <https://github.com/rafrsr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 namespace Rafrsr\LibArray2Object\Tests\Parser;
 

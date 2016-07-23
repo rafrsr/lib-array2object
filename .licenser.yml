@@ -1,0 +1,8 @@
+finder:
+  in:
+    - src
+    - tests
+license: symfony
+parameters:
+   author: Rafael SR <https://github.com/rafrsr>
+   package: rafrsr/lib-array2object
