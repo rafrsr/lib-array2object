@@ -72,9 +72,7 @@ class Object2Array
                 }
             );
         } else {
-            $reflClass = new \ReflectionClass($object);
-
-            foreach (Utils::getClassProperties($reflClass) as $property) {
+            foreach (Utils::getClassProperties(get_class($object)) as $property) {
                 if ($this->context->getReader()->isReadable($object, $property->getName())) {
                     $value = $this->context->getReader()->getValue($object, $property->getName());
                     $types = $types = Utils::getPropertyTypes($property);

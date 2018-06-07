@@ -24,6 +24,11 @@ class Array2Object
     private $context;
 
     /**
+     * @var array
+     */
+    private static $classProperties = [];
+
+    /**
      * @param Array2ObjectContext $context
      */
     public function __construct(Array2ObjectContext $context)
@@ -89,12 +94,27 @@ class Array2Object
         if ($object instanceof Array2ObjectInterface) {
             $object->__populate($data);
         } else {
-            $reflClass = new \ReflectionClass($object);
-            foreach (Utils::getClassProperties($reflClass) as $property) {
+            //this static cache is helpful when populate
+            //many objects of the same type in a loop
+            static $matcherCache = [];
+            static $writerCache = [];
+
+            $objectClass = get_class($object);
+            $properties = Utils::getClassProperties($objectClass);
+            foreach ($properties as $property) {
+                //save in cache if the property is writable
+                $writableCacheHash = $objectClass.$property->getName();
+                if (!isset($writerCache[$writableCacheHash])) {
+                    $writerCache[$writableCacheHash] = $this->context->getWriter()->isWritable($object, $property->getName());
+                }
                 foreach ($data as $key => $value) {
-                    if ($this->context->getMatcher()->match($property, $key)
-                        && $this->context->getWriter()->isWritable($object, $property->getName())
-                    ) {
+                    //save in cache if the property name match with key
+                    $propHash = $objectClass.$property->getName().$key;
+                    if (!isset($matcherCache[$propHash])) {
+                        $matcherCache[$propHash] = $this->context->getMatcher()->match($property, $key);
+                    }
+
+                    if ($writerCache[$writableCacheHash] && $matcherCache[$propHash]) {
                         $types = Utils::getPropertyTypes($property);
                         $value = $this->parseValue($value, $types, $property, $object);
                         $this->context->getWriter()->setValue($object, $property->getName(), $value);
