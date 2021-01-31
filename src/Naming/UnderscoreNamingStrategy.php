@@ -10,7 +10,7 @@
  */
 namespace Rafrsr\LibArray2Object\Naming;
 
-use Doctrine\Common\Inflector\Inflector;
+use Rafrsr\LibArray2Object\Inflector;
 
 /**
  * Transform property name from "propertyName" -> "property_name".

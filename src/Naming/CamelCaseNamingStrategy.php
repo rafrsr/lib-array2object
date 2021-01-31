@@ -10,7 +10,7 @@
  */
 namespace Rafrsr\LibArray2Object\Naming;
 
-use Doctrine\Common\Util\Inflector;
+use Rafrsr\LibArray2Object\Inflector;
 
 /**
  * Transform property name from "property_name" -> "propertyName".
@@ -37,10 +37,6 @@ class CamelCaseNamingStrategy implements NamingStrategyInterface
      */
     public function transformName($name)
     {
-        if ($this->ucFirst) {
-            return Inflector::classify($name);
-        } else {
-            return Inflector::camelize($name);
-        }
+        return $this->ucFirst ? Inflector::classify($name) : Inflector::camelize($name);
     }
 }
