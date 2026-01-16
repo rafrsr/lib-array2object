@@ -108,7 +108,7 @@ class Object2Array
                 if ($parser instanceof ValueParserInterface) {
                     if (is_array($value) && strpos($type, '[]') !== false) {
                         foreach ($value as $key => &$arrayValue) {
-                            $arrayValue = $parser->toArrayValue($arrayValue, str_replace('[]', null, $type), $property, $arrayValue);
+                            $arrayValue = $parser->toArrayValue($arrayValue, str_replace('[]', '', $type), $property, $arrayValue);
                         }
                     } else {
                         $value = $parser->toArrayValue($value, $type, $property, $object);

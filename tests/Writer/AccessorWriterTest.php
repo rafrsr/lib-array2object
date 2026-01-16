@@ -10,10 +10,11 @@
  */
 namespace Rafrsr\LibArray2Object\Tests\Writer;
 
+use PHPUnit\Framework\TestCase;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 use Rafrsr\LibArray2Object\Writer\AccessorWriter;
 
-class AccessorWriterTest extends \PHPUnit_Framework_TestCase
+class AccessorWriterTest extends TestCase
 {
     public function testIsWritable()
     {

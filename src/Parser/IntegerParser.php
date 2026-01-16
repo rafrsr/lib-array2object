@@ -28,7 +28,7 @@ class IntegerParser implements ValueParserInterface
     public function toObjectValue($value, $type, \ReflectionProperty $property, $object)
     {
         if ($type === 'integer' || $type === 'int') {
-            return (integer) $value;
+            return (int) $value;
         }
 
         return $value;

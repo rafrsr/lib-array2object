@@ -13,8 +13,6 @@ use Doctrine\Inflector\InflectorFactory;
 
 /**
  * Class Inflector
- *
- * @package Ynlo\GraphQLBundle\Util
  */
 class Inflector
 {
@@ -25,13 +23,8 @@ class Inflector
      *
      * @return string $word  Tableized word
      */
-    public static function tableize($word)
+    public static function tableize(string $word): string
     {
-        // BC with doctrine inflector ^1.0
-        if (!class_exists('Doctrine\Inflector\InflectorFactory')) {
-            return \Doctrine\Common\Inflector\Inflector::tableize($word);
-        }
-
         return InflectorFactory::create()->build()->tableize($word);
     }
 
@@ -42,13 +35,8 @@ class Inflector
      *
      * @return string $word  Classified word
      */
-    public static function classify($word)
+    public static function classify(string $word): string
     {
-        // BC with doctrine inflector ^1.0
-        if (!class_exists('Doctrine\Inflector\InflectorFactory')) {
-            return \Doctrine\Common\Inflector\Inflector::classify($word);
-        }
-
         return InflectorFactory::create()->build()->classify($word);
     }
 
@@ -59,13 +47,8 @@ class Inflector
      *
      * @return string $word
      */
-    public static function camelize($word)
+    public static function camelize(string $word): string
     {
-        // BC with doctrine inflector ^1.0
-        if (!class_exists('Doctrine\Inflector\InflectorFactory')) {
-            return \Doctrine\Common\Inflector\Inflector::camelize($word);
-        }
-
         return InflectorFactory::create()->build()->camelize($word);
     }
 
@@ -76,13 +59,8 @@ class Inflector
      *
      * @return string Word in plural
      */
-    public static function pluralize($word)
+    public static function pluralize(string $word): string
     {
-        // BC with doctrine inflector ^1.0
-        if (!class_exists('Doctrine\Inflector\InflectorFactory')) {
-            return \Doctrine\Common\Inflector\Inflector::pluralize($word);
-        }
-
         return InflectorFactory::create()->build()->pluralize($word);
     }
 
@@ -93,12 +71,8 @@ class Inflector
      *
      * @return string Word in singular
      */
-    public static function singularize($word)
+    public static function singularize(string $word): string
     {
-        // BC with doctrine inflector ^1.0
-        if (!class_exists('Doctrine\Inflector\InflectorFactory')) {
-            return \Doctrine\Common\Inflector\Inflector::singularize($word);
-        }
 
         return InflectorFactory::create()->build()->singularize($word);
     }

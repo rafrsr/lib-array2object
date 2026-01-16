@@ -51,9 +51,6 @@ class ReflectionWriter implements PropertyWriterInterface
     {
         if ($this->isWritable($object, $propertyPath)) {
             $property = new \ReflectionProperty(get_class($object), $propertyPath);
-            if (!$property->isPublic()) {
-                $property->setAccessible(true);
-            }
 
             $property->setValue($object, $value);
         }

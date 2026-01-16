@@ -10,9 +10,10 @@
  */
 namespace Rafrsr\LibArray2Object\Tests\Naming;
 
+use PHPUnit\Framework\TestCase;
 use Rafrsr\LibArray2Object\Naming\CallableNamingStrategy;
 
-class CallableNamingStrategyTest extends \PHPUnit_Framework_TestCase
+class CallableNamingStrategyTest extends TestCase
 {
     public function testTransformName()
     {

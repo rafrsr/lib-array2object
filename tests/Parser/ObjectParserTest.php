@@ -10,6 +10,7 @@
  */
 namespace Rafrsr\LibArray2Object\Tests\Parser;
 
+use PHPUnit\Framework\TestCase;
 use Rafrsr\LibArray2Object\Array2ObjectContext;
 use Rafrsr\LibArray2Object\Matcher\CamelizeMatcher;
 use Rafrsr\LibArray2Object\Parser\ObjectParser;
@@ -17,7 +18,7 @@ use Rafrsr\LibArray2Object\Parser\StringParser;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 use Rafrsr\LibArray2Object\Writer\AccessorWriter;
 
-class ObjectParserTest extends \PHPUnit_Framework_TestCase
+class ObjectParserTest extends TestCase
 {
     public function testParse()
     {

@@ -40,10 +40,10 @@ class BooleanParser implements ValueParserInterface
                         $value = false;
                         break;
                     default:
-                        $value = (boolean) $value;
+                        $value = (bool) $value;
                 }
             } else {
-                $value = (boolean) $value;
+                $value = (bool) $value;
             }
         }
 

@@ -25,7 +25,7 @@ class AccessorReader implements PropertyReaderInterface
      *
      * @param PropertyAccessorBuilder|null $builder
      */
-    public function __construct(PropertyAccessorBuilder $builder = null)
+    public function __construct(?PropertyAccessorBuilder $builder = null)
     {
         if (!$builder) {
             $builder = new PropertyAccessorBuilder();

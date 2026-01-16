@@ -10,6 +10,7 @@
  */
 namespace Rafrsr\LibArray2Object\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Rafrsr\LibArray2Object\Naming\UnderscoreNamingStrategy;
 use Rafrsr\LibArray2Object\Object2ArrayBuilder;
 use Rafrsr\LibArray2Object\Parser\CallableParser;
@@ -17,7 +18,7 @@ use Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace2\Manager;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Player;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 
-class Object2ArrayTest extends \PHPUnit_Framework_TestCase
+class Object2ArrayTest extends TestCase
 {
     public function testCreateArray()
     {

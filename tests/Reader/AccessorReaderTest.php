@@ -10,10 +10,11 @@
  */
 namespace Rafrsr\LibArray2Object\Tests\Reader;
 
+use PHPUnit\Framework\TestCase;
 use Rafrsr\LibArray2Object\Reader\AccessorReader;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 
-class AccessorReaderTest extends \PHPUnit_Framework_TestCase
+class AccessorReaderTest extends TestCase
 {
     public function testIsReadable()
     {

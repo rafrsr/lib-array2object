@@ -10,13 +10,14 @@
  */
 namespace Rafrsr\LibArray2Object\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Rafrsr\LibArray2Object\Array2ObjectBuilder;
 use Rafrsr\LibArray2Object\Tests\Fixtures\NameSpace1\Game;
 
 /**
  * Class Array2ObjectInterfaceTest.
  */
-class Array2ObjectInterfaceTest extends \PHPUnit_Framework_TestCase
+class Array2ObjectInterfaceTest extends TestCase
 {
     public function testPopulate()
     {

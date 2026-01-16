@@ -10,12 +10,13 @@
  */
 namespace Rafrsr\LibArray2Object\Tests\Parser;
 
+use PHPUnit\Framework\TestCase;
 use Rafrsr\LibArray2Object\Parser\ValueParserInterface;
 
 /**
  * Class ParserTester.
  */
-abstract class ParserTester extends \PHPUnit_Framework_TestCase
+abstract class ParserTester extends TestCase
 {
     /**
      * @return ValueParserInterface

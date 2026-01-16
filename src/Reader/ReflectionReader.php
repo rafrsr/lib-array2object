@@ -48,9 +48,6 @@ class ReflectionReader implements PropertyReaderInterface
     {
         if ($this->isReadable($object, $propertyPath)) {
             $property = new \ReflectionProperty(get_class($object), $propertyPath);
-            if (!$property->isPublic()) {
-                $property->setAccessible(true);
-            }
 
             return $property->getValue($object);
         }

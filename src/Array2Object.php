@@ -151,7 +151,7 @@ class Array2Object
 
                         $tmpArray = [];
                         foreach ($value as $key => $arrayValue) {
-                            $parsedValue = $parser->toObjectValue($arrayValue, str_replace('[]', null, $type), $property, $object);
+                            $parsedValue = $parser->toObjectValue($arrayValue, str_replace('[]', '', $type), $property, $object);
                             //the annotation [] is used alone to ignore array keys
                             if (in_array('[]', $types, true)) {
                                 $tmpArray[] = $parsedValue;
@@ -161,7 +161,7 @@ class Array2Object
                         }
                         $value = $tmpArray;
                     } else {
-                        $value = $parser->toObjectValue($value, str_replace('[]', null, $type), $property, $object);
+                        $value = $parser->toObjectValue($value, str_replace('[]', '', $type), $property, $object);
                     }
                 } else {
                     throw new \InvalidArgumentException(sprintf('%s is not a valid parser.', get_class($parser)));

@@ -82,7 +82,6 @@ class ObjectParser implements ValueParserInterface
         }
 
         if (is_array($value) && $className !== null && class_exists($className) && $this->array2Object) {
-            $property->setAccessible(true);
             $currentValue = $property->getValue($object);
             if (is_object($currentValue)) {
                 $this->array2Object->populate($currentValue, $value);

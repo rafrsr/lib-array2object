@@ -10,13 +10,14 @@
  */
 namespace Rafrsr\LibArray2Object\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Rafrsr\LibArray2Object\Array2ObjectContext;
 use Rafrsr\LibArray2Object\Matcher\CamelizeMatcher;
 use Rafrsr\LibArray2Object\Parser\IntegerParser;
 use Rafrsr\LibArray2Object\Parser\StringParser;
 use Rafrsr\LibArray2Object\Writer\AccessorWriter;
 
-class Array2ObjectContextTest extends \PHPUnit_Framework_TestCase
+class Array2ObjectContextTest extends TestCase
 {
     public function testGetSetParsers()
     {

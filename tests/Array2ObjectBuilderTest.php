@@ -10,6 +10,7 @@
  */
 namespace Rafrsr\LibArray2Object\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Rafrsr\LibArray2Object\Array2ObjectBuilder;
 use Rafrsr\LibArray2Object\Array2ObjectContext;
 use Rafrsr\LibArray2Object\Matcher\CamelizeMatcher;
@@ -20,7 +21,7 @@ use Rafrsr\LibArray2Object\Parser\StringParser;
 use Rafrsr\LibArray2Object\Writer\AccessorWriter;
 use Rafrsr\LibArray2Object\Writer\ReflectionWriter;
 
-class Array2ObjectBuilderTest extends \PHPUnit_Framework_TestCase
+class Array2ObjectBuilderTest extends TestCase
 {
     public function testCreate()
     {

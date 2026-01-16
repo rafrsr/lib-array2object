@@ -10,12 +10,13 @@
  */
 namespace Rafrsr\LibArray2Object\Tests\Matcher;
 
+use PHPUnit\Framework\TestCase;
 use Rafrsr\LibArray2Object\Matcher\PropertyMatcherInterface;
 
 /**
  * Class PropertyMatcherTester.
  */
-abstract class PropertyMatcherTester extends \PHPUnit_Framework_TestCase
+abstract class PropertyMatcherTester extends TestCase
 {
     public function testMatch()
     {

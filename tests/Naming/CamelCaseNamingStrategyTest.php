@@ -10,9 +10,10 @@
  */
 namespace Rafrsr\LibArray2Object\Tests\Naming;
 
+use PHPUnit\Framework\TestCase;
 use Rafrsr\LibArray2Object\Naming\CamelCaseNamingStrategy;
 
-class CamelCaseNamingStrategyTest extends \PHPUnit_Framework_TestCase
+class CamelCaseNamingStrategyTest extends TestCase
 {
     public function testTransformName()
     {

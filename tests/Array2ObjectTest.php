@@ -10,12 +10,13 @@
  */
 namespace Rafrsr\LibArray2Object\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Rafrsr\LibArray2Object\Array2ObjectBuilder;
 use Rafrsr\LibArray2Object\Matcher\MapMatcher;
 use Rafrsr\LibArray2Object\Parser\CallableParser;
 use Rafrsr\LibArray2Object\Tests\Fixtures\Team;
 
-class Array2ObjectTest extends \PHPUnit_Framework_TestCase
+class Array2ObjectTest extends TestCase
 {
     public function testArray2Object()
     {
@@ -60,7 +61,7 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
             new CallableParser(
                 function ($value, $type, \ReflectionProperty $property, $object) {
                     if ($property->getName() === 'salary') {
-                        $value = str_replace('$', null, $value);
+                        $value = str_replace('$', '', $value);
                     }
 
                     return $value;
@@ -91,13 +92,13 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
 
         static::assertTrue($team->getPlayers()[2]->isRegular());
 
-        static::assertInternalType('string', $team->getName());
-        static::assertInternalType('integer', $team->getPoints());
-        static::assertInternalType('float', $team->getManager()->getSalary());
-        static::assertInternalType('boolean', $team->getPlayers()[0]->isRegular());
-        static::assertInternalType('float', $team->getPlayers()[0]->getHeight());
-        static::assertInternalType('boolean', $team->getPlayers()[2]->isRegular());
-        static::assertInternalType('integer', $team->getScores()[2016]);
+        static::assertIsString($team->getName());
+        static::assertIsInt($team->getPoints());
+        static::assertIsFloat($team->getManager()->getSalary());
+        static::assertIsBool($team->getPlayers()[0]->isRegular());
+        static::assertIsFloat($team->getPlayers()[0]->getHeight());
+        static::assertIsBool($team->getPlayers()[2]->isRegular());
+        static::assertIsInt($team->getScores()[2016]);
 
         $teamArray = [
             'name' => 'New Name',
@@ -178,13 +179,13 @@ class Array2ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testPopulateObjectError()
     {
-        static::setExpectedException('\InvalidArgumentException');
+        $this->expectException(\InvalidArgumentException::class);
         Array2ObjectBuilder::create()->build()->populate(Team::class, []);
     }
 
     public function testCreateObjectError()
     {
-        static::setExpectedException('\InvalidArgumentException');
+        $this->expectException(\InvalidArgumentException::class);
         Array2ObjectBuilder::create()->build()->createObject(new Team(), []);
     }
 
